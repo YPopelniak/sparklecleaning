@@ -108,7 +108,7 @@ export default function Gallery() {
                 <SwiperSlide>
                     <div className={'group Regular'}>
                         <h4>Regular Cleaning</h4>
-                        <p><span className={'Discounto'}>$40</span>$36 /maid-hour</p>
+                        {/*<p>/!*<span className={'Discounto'}>$40</span>*!/$40 /maid-hour</p>*/}
                     </div>
                 </SwiperSlide>
 {/*                <SwiperSlide>
@@ -120,13 +120,13 @@ export default function Gallery() {
                 <SwiperSlide>
                     <div className={'group Move_in'}>
                         <h4>Move-in/ Move-out Cleaning</h4>
-                        <p><span className={'Discounto'}>$47</span>$43 /maid-hour</p>
+                        {/*<p>/!*<span className={'Discounto'}>$47</span>*!/$43 /maid-hour</p>*/}
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className={'group Office'}>
                         <h4>After Repair Cleaning</h4>
-                        <p><span className={'Discounto'}>$48</span>$44 /maid-hour</p>
+                        {/*<p>/!*<span className={'Discounto'}>$48</span>*!/$45 /maid-hour</p>*/}
                     </div>
                 </SwiperSlide>
 {/*                <SwiperSlide>
@@ -138,7 +138,7 @@ export default function Gallery() {
                 <SwiperSlide>
                     <div className={'group Deep'}>
                         <h4>Deep Cleaning</h4>
-                        <p> <span className={'Discounto'}>$47</span>$43/maid-hour</p>
+                        {/*<p> /!*<span className={'Discounto'}>$47</span>*!/$43/maid-hour</p>*/}
                     </div>
                 </SwiperSlide>{/*
                 <SwiperSlide>

@@ -1,0 +1,165 @@
+.form{
+  margin-top: -50px !important;
+  margin-bottom: 50px;
+
+
+  .Button__Booking{
+    width: 100%;
+    height: 56px;
+    box-shadow: none;
+    box-sizing: border-box;
+  }
+
+
+  .logo {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 50px;
+
+    h3 {
+      width: 100%;
+      z-index: 100;
+      margin: 0 auto 20px;
+      align-items: flex-start;
+      color: var(--Primery-Color-2, #003156);
+      text-align: center;
+      font-family: 'Zen Antique', serif;
+      font-size: 32px;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+  }
+  div{
+}
+  .form_name{
+    margin: 0;
+    padding: 0 0 16px 8px;
+    color: #003156;
+    font-family: 'Zen Antique', serif;
+    font-weight: 600;
+    font-size: 24px;
+  }
+  .Error{
+    color: red;
+  }
+
+  .button{
+    margin-top: 50px;
+    justify-content: center;
+    text-transform: initial;
+    position: relative;
+    display: inline-block;
+
+    &:disabled{
+      background-color: #003156;
+      opacity: 0.5;
+      color: #fff;
+      cursor: not-allowed;
+      pointer-events: auto;
+    }
+
+  }
+
+
+  .width60ch{
+    width: 70ch;
+  }
+  .width30ch{
+    width: 35ch;
+  }
+
+  .ellipse {
+    position: absolute;
+    width: 200px;
+    height: 326px;
+    border-radius: 349px;
+    background: rgba(17, 149, 255, 0.50);
+    filter: blur(150px);
+
+  }
+
+
+
+  .ellipse__two {
+    z-index: -1;
+    bottom: 300px;
+    left: -100px;
+  }
+  .ellipse__three{
+    z-index: -1;
+    top: 100px;
+    right: 0;
+  }
+
+  @media only screen and (min-width: 600px) and (max-width: 1439px) {
+    .logo {
+      padding: 40px 0 0;
+
+
+      h3 {
+        margin: 10px auto 30px;
+        font-size: 28px;
+        font-weight: 400;
+      }
+    }
+  }
+
+
+
+
+    @media only screen and  (max-width: 599px){
+      .ellipse {
+        width: 100px;
+        height: 150px;
+
+
+      }
+
+      .ellipse__two {
+        z-index: -1;
+        bottom: 100px;
+        left: -100px;
+      }
+      .ellipse__three{
+        z-index: -1;
+        top: 100px;
+        right: 0;
+      }
+
+      .logo {
+        padding: 15px 0 0;
+
+
+        h3 {
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          margin: 0 auto 30px;
+          font-size: 22px;
+          font-weight: 300;
+        }
+      }
+
+    div{
+      h3{
+        font-family: 'Zen Antique', serif;
+        font-size: 24px;
+        text-align: center;
+        width: 300px;
+        margin: 15px auto 15px;
+      }}
+    .width60ch{
+      width: 40ch;
+    }
+    .width30ch{
+      width: 19ch;
+    }
+
+  }
+
+
+
+  }
+
+

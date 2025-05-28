@@ -1,6 +1,10 @@
 .form {
   margin-top: -50px !important;
   margin-bottom: 50px;
+  border: #003156 1px solid;
+  border-radius: 50px;
+  max-width: 1240px;
+  padding: 20px 0 30px;
 }
 .form .Button__Booking {
   width: 100%;
@@ -25,6 +29,100 @@
   font-size: 32px;
   font-weight: 600;
   text-transform: capitalize;
+}
+.form .FormControl {
+  padding: 0 20px;
+}
+.form .progress {
+  margin: 0 40px 0;
+  display: flex;
+  gap: 10px;
+}
+.form .progress .step {
+  width: 25%;
+}
+.form .progress .step h5 {
+  text-align: left;
+  margin: 0;
+  padding: 0 0 6px 0;
+  color: #003156;
+  font-family: "Zen Antique", serif;
+  font-weight: 600;
+  font-size: 22px;
+}
+.form .progress .step .span {
+  width: 100%;
+  height: 15px;
+  background-color: #003156;
+}
+.form .select {
+  margin: 0 40px 0;
+}
+.form .select h6 {
+  text-align: left;
+  margin: 20px auto 30px;
+  padding: 0 0 0 0;
+  color: #BCBCBC;
+  font-family: "Zen Antique", serif;
+  font-weight: 900;
+  font-size: 20px;
+}
+.form .select .pay {
+  text-align: center;
+  color: #003156;
+  font-size: 24px;
+}
+.form .select .application {
+  color: #003156;
+  font-size: 22px;
+}
+.form .line {
+  margin: 30px auto 0;
+  height: 1px;
+  width: 93%;
+  background-color: #BCBCBC;
+}
+.form .applicationBox {
+  margin: 30px 40px 0;
+}
+.form .applicationBox .application {
+  display: flex;
+  align-items: flex-end;
+}
+.form .applicationBox .application h6 {
+  text-align: left;
+  padding: 0 0 0 0;
+  margin: 0;
+  color: #003156;
+  font-family: "Zen Antique", serif;
+  font-weight: 900;
+  font-size: 22px;
+}
+.form .applicationBox .application p {
+  text-align: left;
+  margin: 0;
+  padding: 0 0 0 0;
+  color: #003156;
+  opacity: 0.8;
+  font-family: "Zen Antique", serif;
+  font-weight: 900;
+  font-size: 20px;
+}
+.form .applicationBox .formValid h6 {
+  text-align: left;
+  padding: 0 0 0 0;
+  margin: 0;
+  color: red;
+  font-family: "Zen Antique", serif;
+  font-weight: 900;
+  font-size: 18px;
+}
+.form .button_Box {
+  margin: 0;
+  padding: 30px 40px 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 .form .form_name {
   margin: 0;
@@ -52,10 +150,10 @@
   pointer-events: auto;
 }
 .form .width60ch {
-  width: 70ch;
+  width: 60ch;
 }
 .form .width30ch {
-  width: 35ch;
+  width: 100%;
 }
 .form .ellipse {
   position: absolute;
@@ -76,6 +174,13 @@
   right: 0;
 }
 @media only screen and (min-width: 600px) and (max-width: 1439px) {
+  .form {
+    margin: 50px 30px !important;
+    max-width: 1400px;
+  }
+  .form .progress .step h5 {
+    display: none;
+  }
   .form .logo {
     padding: 40px 0 0;
   }
@@ -86,6 +191,43 @@
   }
 }
 @media only screen and (max-width: 599px) {
+  .form {
+    margin: -20px 20px 20px !important;
+  }
+  .form .FormControl {
+    padding: 0 0;
+  }
+  .form .progress .step h5 {
+    display: none;
+  }
+  .form .select {
+    margin: 0 20px 0;
+  }
+  .form .select h6 {
+    margin: 10px auto 15px;
+    font-size: 16px;
+  }
+  .form .select .pay {
+    font-size: 16px;
+  }
+  .form .select .application {
+    font-size: 16px;
+  }
+  .form .applicationBox {
+    margin: 30px 20px 0;
+  }
+  .form .applicationBox .service {
+    display: block;
+  }
+  .form .applicationBox .service p {
+    justify-content: flex-start;
+  }
+  .form .applicationBox .squareFootage {
+    display: block;
+  }
+  .form .applicationBox .squareFootage p {
+    justify-content: flex-start;
+  }
   .form .ellipse {
     width: 100px;
     height: 150px;
@@ -108,7 +250,7 @@
     display: flex;
     justify-content: center;
     margin: 0 auto 30px;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 300;
   }
   .form div h3 {
@@ -119,10 +261,10 @@
     margin: 15px auto 15px;
   }
   .form .width60ch {
-    width: 40ch;
+    width: 100%;
   }
   .form .width30ch {
-    width: 19ch;
+    width: 100%;
   }
 }
 

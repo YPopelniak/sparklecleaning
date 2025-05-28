@@ -34,7 +34,7 @@ function Offering(props) {
                             <img src={Regular} alt={'Regular Cleaning'} className={'Regular'}/>
                             <div className={'group '}>
                                 <h4>Regular Cleaning</h4>
-                                <p><span>$40</span>$36 /maid-hour</p>
+                                {/*<p>/!*<span>$40</span>*!/$40 /maid-hour</p>*/}
                             </div>
                         </div>
                     </a>
@@ -56,7 +56,9 @@ function Offering(props) {
                             <img src={Move_in} alt={'Offering'} className={'Move_in'}/>
                             <div className={'group '}>
                                 <h4>Move-in/ Move-out Cleaning</h4>
+{/*
                                 <p><span>$47</span>$43 /maid-hour</p>
+*/}
                             </div>
                         </div>
                     </a>
@@ -78,7 +80,9 @@ function Offering(props) {
                             <img src={After_Repair} alt={'Offering'} className={'After_Repair'}/>
                             <div className={'group'}>
                                 <h4>After Repair Cleaning</h4>
-                                <p> <span>$48</span>$44 /maid-hour</p>
+{/*
+                                <p> <span>$48</span>$45 /maid-hour</p>
+*/}
                             </div>
                         </div>
                     </a>
@@ -89,7 +93,9 @@ function Offering(props) {
                             <img src={Deep} alt={'Offering'}/>
                             <div className={'group'}>
                                 <h4>Deep Cleaning</h4>
+{/*
                                 <p><span>$47</span>$43 /maid-hour</p>
+*/}
                             </div>
                         </div>
                     </a>
