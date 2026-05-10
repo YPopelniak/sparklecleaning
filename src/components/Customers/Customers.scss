@@ -31,15 +31,6 @@
     max-width: 1440px;
 
 
-    .steamy{
-      background: #B5D5ED !important;
-      h4{color: #FFFFFF !important;}
-      h5{color: #FFFFFF !important;}
-      p{color: #FFFFFF !important;}
-      color: #FFFFFF ;
-
-    }
-
     .comment {
       width: 90%;
       height: auto;
@@ -97,6 +88,7 @@
         height: 28px;
         align-items: center;
         justify-content: center;
+
 
         .More__p {
           margin: 0 10px 0 0;
@@ -205,6 +197,14 @@
     margin: 50px auto 0 ;
     justify-content: center;
     display: flex;
+
+    &:disabled{
+      background-color: #003156;
+      opacity: 0.5;
+      color: #fff;
+      cursor: not-allowed;
+      pointer-events: auto;
+    }
   }
 
   @media only screen and  (max-width: 700px) {

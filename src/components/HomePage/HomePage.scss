@@ -2,6 +2,22 @@
   font-family: 'Work Sans', sans-serif;
   margin: 0 auto 50px;
 
+  .background {
+    position: absolute;
+    width: 100%;
+    height: 103px;
+    background: linear-gradient(180deg, rgba(43, 95, 137, 0.66) 0%, rgba(15, 133, 226, 0.00) 100%);
+
+
+  }
+  .background__two {
+    width: 100%;
+    height: 103px;
+    background: linear-gradient(180deg, rgba(43, 95, 137, 0.66) 0%, rgba(15, 133, 226, 0.00) 100%);
+
+
+  }
+
   .text__container {
     position: relative;
     max-width: 1340px;
@@ -10,11 +26,12 @@
 
     .text {
       //margin-top: 230px;
-      margin-top: -50px;
+      margin-top: -30px;
 
       h1 {
+        text-align: center;
         color: #3C87C0;
-        margin: -10px 0 40px;
+        margin: 0 0 40px;
         font-size: 48px;
         font-weight: 700;
         line-height: 50px;
@@ -37,6 +54,8 @@
     }
 
     .Kitchen {
+      margin-top: -30px;
+
       // margin-top: 230px;
       img {
         width: 776px;
@@ -89,11 +108,11 @@
   @media only screen and (min-width: 600px) and (max-width: 1439px) {
     .text__container{
 
-      margin: 20px auto;
+      margin: 0 auto;
       padding: 0 30px;
 
       .text{
-        margin-top: -10px;
+        margin-top: -80px;
         h1{
           margin: 0;
           font-size: 32px;
@@ -113,6 +132,7 @@
 
       .Kitchen {
         // margin-top: 230px;
+        margin-top: -80px;
         img {
           width: 100%;
           height: auto;
@@ -131,7 +151,7 @@
       padding: 0 15px;
 
       .text{
-        margin-top: -10px;
+        margin-top: -100px;
         margin-bottom: 10px;
         h1{
           margin: 0 0 10px;
@@ -151,6 +171,7 @@
       }
 
       .Kitchen {
+        margin: 0;
         // margin-top: 230px;
         img {
           border-radius: 20px;

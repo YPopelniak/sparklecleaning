@@ -1,12 +1,212 @@
 .form {
+  margin-top: -50px !important;
   margin-bottom: 50px;
+  border: #003156 1px solid;
+  border-radius: 50px;
+  max-width: 1240px;
+  padding: 20px 0 30px;
 }
-.form div h3 {
+.form .Button__Booking {
+  width: 100%;
+  height: 56px;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+.form .logo {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  padding: 0 50px;
+}
+.form .logo h3 {
+  width: 100%;
+  z-index: 100;
+  margin: 0 auto 20px;
+  align-items: flex-start;
+  color: var(--Primery-Color-2, #003156);
+  text-align: center;
   font-family: "Zen Antique", serif;
   font-size: 32px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.form .FormControl {
+  padding: 0 20px;
+}
+.form .progress {
+  margin: 0 40px 0;
+  display: flex;
+  gap: 10px;
+}
+.form .progress .step {
+  width: 25%;
+}
+.form .progress .step h5 {
+  text-align: left;
+  margin: 0;
+  padding: 0 0 6px 0;
+  color: #003156;
+  font-family: "Zen Antique", serif;
+  font-weight: 600;
+  font-size: 22px;
+}
+.form .progress .step .span {
+  width: 100%;
+  height: 15px;
+  background-color: #003156;
+}
+.form .select {
+  margin: 0 40px 0;
+}
+.form .select > h6 {
+  text-align: left;
+  margin: 20px auto 30px;
+  padding: 0 0 0 0;
+  color: #BCBCBC;
+  font-family: "Zen Antique", serif;
+  font-weight: 900;
+  font-size: 20px;
+}
+.form .select .pay {
   text-align: center;
-  width: 500px;
-  margin: 50px auto 50px;
+  color: #003156;
+  font-size: 24px;
+}
+.form .select .application {
+  color: #003156;
+  font-size: 22px;
+}
+.form .payment-summary {
+  text-align: center;
+  margin: 28px auto 18px;
+  max-width: 860px;
+  background: #f7f9fc;
+  border: 1px solid #e4ebf3;
+  border-radius: 18px;
+  padding: 18px 36px 20px;
+  box-shadow: 0 4px 16px rgba(0, 49, 86, 0.05);
+}
+.form .payment-badge {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  border: 1px solid #deebf7;
+  background: linear-gradient(180deg, #f4f9ff 0%, #eaf2fb 100%);
+  color: #1d67a5;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 72px;
+}
+.form .payment-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+  color: #1d67a5;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.form .payment-range {
+  margin: 6px 0 10px;
+  color: #003156;
+  font-size: 62px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.08;
+}
+.form .payment-divider {
+  height: 1px;
+  width: 62%;
+  margin: 8px auto 14px;
+  background: #ccd6e4;
+}
+.form .payment-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  padding: 8px 0;
+}
+.form .payment-row + .payment-row {
+  border-top: 1px dashed #e4ebf3;
+}
+.form .payment-row-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.form .payment-row-icon svg {
+  width: 16px;
+  height: 16px;
+}
+.form .payment-row-icon-home {
+  color: #2f7bc1;
+  background: #e8f3ff;
+}
+.form .payment-row-icon-shield {
+  color: #34a172;
+  background: #e9f8f0;
+}
+.form .payment-row-text {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.45;
+  color: #2f3f52;
+  font-weight: 500;
+}
+.form .line {
+  margin: 30px auto 0;
+  height: 1px;
+  width: 93%;
+  background-color: #BCBCBC;
+}
+.form .applicationBox {
+  margin: 30px 40px 0;
+}
+.form .applicationBox .application {
+  display: flex;
+  align-items: flex-end;
+}
+.form .applicationBox .application h6 {
+  text-align: left;
+  padding: 0 0 0 0;
+  margin: 0;
+  color: #003156;
+  font-family: "Zen Antique", serif;
+  font-weight: 900;
+  font-size: 22px;
+}
+.form .applicationBox .application p {
+  text-align: left;
+  margin: 0;
+  padding: 0 0 0 0;
+  color: #003156;
+  opacity: 0.8;
+  font-family: "Zen Antique", serif;
+  font-weight: 900;
+  font-size: 20px;
+}
+.form .applicationBox .formValid h6 {
+  text-align: left;
+  padding: 0 0 0 0;
+  margin: 0;
+  color: red;
+  font-family: "Zen Antique", serif;
+  font-weight: 900;
+  font-size: 18px;
+}
+.form .button_Box {
+  margin: 0;
+  padding: 30px 40px 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 .form .form_name {
   margin: 0;
@@ -22,15 +222,161 @@
 .form .button {
   margin-top: 50px;
   justify-content: center;
-  display: flex;
+  text-transform: initial;
+  position: relative;
+  display: inline-block;
+}
+.form .button:disabled {
+  background-color: #003156;
+  opacity: 0.5;
+  color: #fff;
+  cursor: not-allowed;
+  pointer-events: auto;
 }
 .form .width60ch {
-  width: 70ch;
+  width: 60ch;
 }
 .form .width30ch {
-  width: 35ch;
+  width: 100%;
+}
+.form .ellipse {
+  position: absolute;
+  width: 200px;
+  height: 326px;
+  border-radius: 349px;
+  background: rgba(17, 149, 255, 0.5);
+  filter: blur(150px);
+}
+.form .ellipse__two {
+  z-index: -1;
+  bottom: 300px;
+  left: -100px;
+}
+.form .ellipse__three {
+  z-index: -1;
+  top: 100px;
+  right: 0;
+}
+@media only screen and (min-width: 600px) and (max-width: 1439px) {
+  .form {
+    margin: 50px 30px !important;
+    max-width: 1400px;
+  }
+  .form .progress .step h5 {
+    display: none;
+  }
+  .form .logo {
+    padding: 40px 0 0;
+  }
+  .form .logo h3 {
+    margin: 10px auto 30px;
+    font-size: 28px;
+    font-weight: 400;
+  }
 }
 @media only screen and (max-width: 599px) {
+  .form {
+    margin: -20px 20px 20px !important;
+  }
+  .form .FormControl {
+    padding: 0 0;
+  }
+  .form .progress .step h5 {
+    display: none;
+  }
+  .form .select {
+    margin: 0 20px 0;
+  }
+  .form .select h6 {
+    margin: 10px auto 15px;
+    font-size: 16px;
+  }
+  .form .select .pay {
+    font-size: 16px;
+  }
+  .form .select .application {
+    font-size: 16px;
+  }
+  .form .payment-summary {
+    margin: 16px auto 10px;
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+  .form .payment-badge {
+    width: 52px;
+    height: 52px;
+    line-height: 52px;
+    font-size: 24px;
+  }
+  .form .payment-title {
+    font-size: 15px;
+    letter-spacing: 0.8px;
+  }
+  .form .payment-range {
+    font-size: 44px;
+    margin: 4px 0 8px;
+  }
+  .form .payment-divider {
+    width: 88%;
+    margin: 8px auto 10px;
+  }
+  .form .payment-row {
+    gap: 10px;
+    padding: 7px 0;
+  }
+  .form .payment-row-icon {
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+  }
+  .form .payment-row-icon svg {
+    width: 13px;
+    height: 13px;
+  }
+  .form .payment-row-text {
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  .form .applicationBox {
+    margin: 30px 20px 0;
+  }
+  .form .applicationBox .service {
+    display: block;
+  }
+  .form .applicationBox .service p {
+    justify-content: flex-start;
+  }
+  .form .applicationBox .squareFootage {
+    display: block;
+  }
+  .form .applicationBox .squareFootage p {
+    justify-content: flex-start;
+  }
+  .form .ellipse {
+    width: 100px;
+    height: 150px;
+  }
+  .form .ellipse__two {
+    z-index: -1;
+    bottom: 100px;
+    left: -100px;
+  }
+  .form .ellipse__three {
+    z-index: -1;
+    top: 100px;
+    right: 0;
+  }
+  .form .logo {
+    padding: 15px 0 0;
+  }
+  .form .logo h3 {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 30px;
+    font-size: 20px;
+    font-weight: 300;
+  }
   .form div h3 {
     font-family: "Zen Antique", serif;
     font-size: 24px;
@@ -39,10 +385,10 @@
     margin: 15px auto 15px;
   }
   .form .width60ch {
-    width: 40ch;
+    width: 100%;
   }
   .form .width30ch {
-    width: 20ch;
+    width: 100%;
   }
 }
 

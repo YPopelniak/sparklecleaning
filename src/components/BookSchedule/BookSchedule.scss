@@ -1,14 +1,158 @@
-.form{
+.form {
+  margin-top: -50px !important;
   margin-bottom: 50px;
-  div{
-  h3{
-    font-family: 'Zen Antique', serif;
-    font-size: 32px;
-    text-align: center;
-    width: 500px;
-    margin: 50px auto 50px;
-  }}
-  .form_name{
+  border: #003156 1px solid;
+  border-radius: 50px;
+  max-width: 1240px;
+  padding: 20px 0 30px;
+
+
+  .Button__Booking {
+    width: 100%;
+    height: 56px;
+    box-shadow: none;
+    box-sizing: border-box;
+  }
+
+
+  .logo {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 50px;
+
+    h3 {
+      width: 100%;
+      z-index: 100;
+      margin: 0 auto 20px;
+      align-items: flex-start;
+      color: var(--Primery-Color-2, #003156);
+      text-align: center;
+      font-family: 'Zen Antique', serif;
+      font-size: 32px;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+  }
+
+  div {
+  }
+
+  .FormControl{
+    padding: 0 20px;
+  }
+
+  .progress {
+    margin: 0 40px 0;
+
+    display: flex;
+    gap: 10px;
+
+    .step {
+      width: 25%;
+
+      h5 {
+        text-align: left;
+        margin: 0;
+        padding: 0 0 6px 0;
+        color: #003156;
+        font-family: 'Zen Antique', serif;
+        font-weight: 600;
+        font-size: 22px;
+      }
+
+      .span {
+        width: 100%;
+        height: 15px;
+        background-color: #003156;
+      }
+    }
+  }
+
+  .select {
+    margin: 0 40px 0;
+
+    h6 {
+      text-align: left;
+      margin: 20px auto 30px;
+      padding: 0 0 0 0;
+      color: #BCBCBC;
+      font-family: 'Zen Antique', serif;
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    .pay {
+      text-align: center;
+      color: #003156;
+      font-size: 24px;
+
+    }
+
+    .application {
+      color: #003156;
+      font-size: 22px;
+    }
+  }
+
+  .line {
+    margin: 30px auto 0;
+    height: 1px;
+    width: 93%;
+    background-color: #BCBCBC;
+  }
+
+  .applicationBox {
+    margin: 30px 40px 0;
+
+    .application {
+      display: flex;
+      align-items: flex-end;
+
+      h6 {
+        text-align: left;
+        padding: 0 0 0 0;
+        margin: 0;
+        color: #003156;
+        font-family: 'Zen Antique', serif;
+        font-weight: 900;
+        font-size: 22px;
+      }
+
+      p {
+        text-align: left;
+        margin: 0;
+        padding: 0 0 0 0;
+        color: #003156;
+        opacity: 0.8;
+        font-family: 'Zen Antique', serif;
+        font-weight: 900;
+        font-size: 20px;
+      }
+    }
+
+    .formValid {
+      h6 {
+        text-align: left;
+        padding: 0 0 0 0;
+        margin: 0;
+        color: red;
+        font-family: 'Zen Antique', serif;
+        font-weight: 900;
+        font-size: 18px;
+      }
+    }
+  }
+
+  .button_Box {
+    margin: 0;
+    padding: 30px 40px 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .form_name {
     margin: 0;
     padding: 0 0 16px 8px;
     color: #003156;
@@ -16,42 +160,193 @@
     font-weight: 600;
     font-size: 24px;
   }
-  .Error{
+
+  .Error {
     color: red;
   }
 
-  .button{
+  .button {
     margin-top: 50px;
     justify-content: center;
-    display: flex;
-  }
-  .width60ch{
-    width: 70ch;
-  }
-  .width30ch{
-    width: 35ch;
-  }
-  @media only screen and  (max-width: 599px){
+    text-transform: initial;
+    position: relative;
+    display: inline-block;
 
-    div{
-      h3{
+    &:disabled {
+      background-color: #003156;
+      opacity: 0.5;
+      color: #fff;
+      cursor: not-allowed;
+      pointer-events: auto;
+    }
+
+  }
+
+
+  .width60ch {
+    width: 60ch;
+  }
+
+  .width30ch {
+    width: 100%
+  }
+
+  .ellipse {
+    position: absolute;
+    width: 200px;
+    height: 326px;
+    border-radius: 349px;
+    background: rgba(17, 149, 255, 0.50);
+    filter: blur(150px);
+
+  }
+
+
+  .ellipse__two {
+    z-index: -1;
+    bottom: 300px;
+    left: -100px;
+  }
+
+  .ellipse__three {
+    z-index: -1;
+    top: 100px;
+    right: 0;
+  }
+
+  @media only screen and (min-width: 600px) and (max-width: 1439px) {
+    margin: 50px 30px !important;
+    max-width: 1400px;
+
+    .progress {
+      .step {
+        h5 {
+          display: none;
+        }
+      }
+    }
+
+    .logo {
+      padding: 40px 0 0;
+
+
+      h3 {
+        margin: 10px auto 30px;
+        font-size: 28px;
+        font-weight: 400;
+      }
+    }
+  }
+
+
+  @media only screen and (max-width: 599px) {
+    margin:-20px 20px 20px !important;
+
+    .FormControl{
+      padding: 0 0;
+    }
+
+    .progress {
+      .step {
+        h5 {
+          display: none;
+        }
+      }
+    }
+    .select {
+      margin: 0 20px 0;
+
+      h6 {
+        margin: 10px auto 15px;
+        font-size: 16px;
+
+      }
+
+      .pay {
+        font-size: 16px;
+
+      }
+
+      .application {
+        font-size: 16px;
+      }
+
+    }
+    .applicationBox {
+      margin: 30px 20px 0;
+
+      .application {
+
+      }
+
+      .service {
+        display: block;
+
+        p {
+          justify-content: flex-start
+        }
+
+      }
+      .squareFootage{
+        display: block;
+
+        p {
+          justify-content: flex-start
+        }
+      }
+
+    }
+
+    .ellipse {
+      width: 100px;
+      height: 150px;
+
+    }
+
+    .ellipse__two {
+      z-index: -1;
+      bottom: 100px;
+      left: -100px;
+    }
+    .ellipse__three {
+      z-index: -1;
+      top: 100px;
+      right: 0;
+    }
+
+    .logo {
+      padding: 15px 0 0;
+
+
+      h3 {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto 30px;
+        font-size: 20px;
+        font-weight: 300;
+      }
+    }
+
+    div {
+      h3 {
         font-family: 'Zen Antique', serif;
         font-size: 24px;
         text-align: center;
         width: 300px;
         margin: 15px auto 15px;
-      }}
-    .width60ch{
-      width: 40ch;
+      }
     }
-    .width30ch{
-      width: 20ch;
+    .width60ch {
+      width: 100%;
+    }
+    .width30ch {
+      width: 100%
     }
 
   }
 
 
-
-  }
+}
 
 

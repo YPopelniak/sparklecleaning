@@ -2,15 +2,22 @@ import React from 'react';
 import DrawerAppBar from "../UI/DrawerAppBar/DrawerAppBar";
 import {Grid} from "@mui/material";
 import './HomePage.css'
-import Kitchen from '../imgs/Kitchen.jpeg'
 import CleaningButton from "../CleaningButton/CleaningButton";
+import GalleryFoto from "../UI/GalleryFoto/GalleryFoto";
+import BookSchedule from "../BookSchedule/BookSchedule";
 
 function HomePage() {
     return (
         <Grid container className={'homePage'} id={'home'}>
-            <Grid item xs={12} sx={{zIndex:10}}><DrawerAppBar/></Grid>
+            <div className={'background'}/>
+            <Grid item xs={12}><DrawerAppBar/></Grid>
             <Grid item xs={12}><CleaningButton/></Grid>
+            <Grid item xs={12}><BookSchedule/></Grid>
+
+            <div className={'background__two'}/>
+
             <Grid container className={'text__container'}>
+
                 <Grid item  xs={12} md={5} sm={7} className={'text'}>
                     <h1>Chicago <span>Sparkle</span><br/>
                         Elite Cleaning</h1>
@@ -32,7 +39,7 @@ function HomePage() {
                     </p>
                 </Grid>
                 <Grid item xs={12} md={7} sm={5} className={'Kitchen'}>
-                    <img src={Kitchen} alt={'Kitchen'}/>
+                    <GalleryFoto/>
 
                 </Grid>
                 <div className={'ellipse ellipse__one'}></div>

@@ -1,6 +1,6 @@
 .App {
-    height: 3000px;
-
+    position: relative;
+    max-width: 100vw;
 
 }
 

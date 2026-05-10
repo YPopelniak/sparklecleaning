@@ -173,10 +173,10 @@
   }
   .Footer .Section .link {
     margin: 0;
+    min-width: 100wh;
   }
   .Footer .Section .links {
     margin: 0;
-    justify-content: center;
     display: grid;
   }
   .Footer .Section .links hr {
@@ -198,6 +198,7 @@
   }
   .Footer .Section .links a {
     justify-content: center;
+    margin-left: 20px;
     font-family: "Work Sans", sans-serif;
     height: 24px;
     margin-bottom: 27px;
@@ -209,6 +210,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+  .Footer .Section .Services a {
+    margin-left: 0;
+    justify-content: center !important;
   }
   .Footer .Copyright {
     margin-top: 30px;

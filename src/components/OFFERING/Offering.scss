@@ -40,8 +40,8 @@
     z-index: 100;
     max-width: 1440px;
     justify-content: center;
-    display: grid;
     align-items: center;
+    display: grid;
     width: 380px;
     transition: 1s;
 
@@ -69,12 +69,16 @@
 
   .group {
     box-sizing: border-box;
-    z-index: -100;
+    position: relative;
+    z-index: 1;
     margin-top: -27px;
-    padding-top: 30px;
+    padding: 0;
+    //padding-top: 30px;
     border-radius: 5px;
     width: 330px;
     height: 120px;
+    align-items: center;
+    display: flex;
 
 
     h4 {
@@ -85,6 +89,7 @@
       font-style: normal;
       font-weight: 400;
       line-height: normal;
+      text-align: center;
     }
 
     p {
@@ -95,6 +100,14 @@
       font-style: normal;
       font-weight: 400;
       line-height: normal;
+
+
+      span{
+
+        font-size: 18px;
+        text-decoration: line-through;
+
+      }
     }
   }
 
@@ -276,7 +289,8 @@
     .group {
       justify-content: center;
       box-sizing: border-box;
-      z-index: -100;
+      position: relative;
+      z-index: 1;
       margin-top: -27px;
       border-radius: 5px;
       padding: 27px 8px;
@@ -290,6 +304,11 @@
 
       p {
         font-size: 24px;
+        span{
+
+          font-size: 12px;
+
+        }
 
       }
     }
@@ -349,7 +368,8 @@
     .group {
       justify-content: center;
       box-sizing: border-box;
-      z-index: -100;
+      position: relative;
+      z-index: 1;
       margin-top: -27px;
       border-radius: 5px;
       padding: 27px 4px;
@@ -357,12 +377,19 @@
       height: 110px;
 
       h4 {
-        font-size: 16px;
+        font-size: 18px;
+        padding: 5px;
 
       }
 
       p {
-        font-size: 20px;
+        font-size: 14px;
+        white-space: nowrap;
+        span{
+
+          font-size: 10px;
+
+        }
 
       }
     }

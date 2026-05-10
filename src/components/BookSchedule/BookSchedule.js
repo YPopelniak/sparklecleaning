@@ -3,25 +3,28 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from "@mui/material/InputLabel";
-import {Button, FormControl} from "@mui/material";
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
+import { Button, FormControl } from "@mui/material";
 import './BookSchedule.css'
-import {useEffect, useState} from "react";
-import {sendMessage} from "../../api/bookSchedule.ts";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {DemoContainer, DemoItem} from "@mui/x-date-pickers/internals/demo";
-import {DatePicker} from "@mui/x-date-pickers/DatePicker";
-import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
+import { useEffect, useState } from "react";
+import { sendMessage } from "../../api/bookSchedule.ts";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import dayjs from 'dayjs';
-import {renderTimeViewClock, TimePicker} from "@mui/x-date-pickers";
+import { renderTimeViewClock, TimePicker } from "@mui/x-date-pickers";
 import * as PropTypes from "prop-types";
-import {MuiTelInput} from 'mui-tel-input'
-import { enqueueSnackbar} from 'notistack';
+import { MuiTelInput } from 'mui-tel-input'
+import { enqueueSnackbar } from 'notistack';
+
+
 
 
 const today = dayjs();
-
 
 const service_list = [
     {
@@ -32,10 +35,10 @@ const service_list = [
         value: 2,
         label: 'After Repair',
     },
-    {
-        value: 3,
-        label: 'Office/ Commercial',
-    },
+    // {
+    //     value: 3,
+    //     label: 'Office/ Commercial',
+    // },
     {
         value: 4,
         label: 'Move-in/ Move-out',
@@ -44,18 +47,18 @@ const service_list = [
         value: 5,
         label: 'Deep Cleaning',
     },
-    {
-        value: 6,
-        label: 'Basic Cleaning',
-    },
-    {
-        value: 7,
-        label: 'Pets and a Clean Home',
-    },
-    {
-        value: 8,
-        label: 'Holiday Cleaning',
-    },
+    // {
+    //     value: 6,
+    //     label: 'Basic Cleaning',
+    // },
+    // {
+    //     value: 7,
+    //     label: 'Pets and a Clean Home',
+    // },
+    // {
+    //     value: 8,
+    //     label: 'Holiday Cleaning',
+    // },
 ];
 const squareFootage_list = [
     {
@@ -81,6 +84,26 @@ const squareFootage_list = [
     {
         value: 6,
         label: '1500 Sq Ft - 2000 Sq Ft'
+    },
+    {
+        value: 7,
+        label: '2000 Sq Ft - 2500 Sq Ft'
+    },
+    {
+        value: 8,
+        label: '2500 Sq Ft - 3000 Sq Ft'
+    },
+    {
+        value: 9,
+        label: '3000 Sq Ft - 4000 Sq Ft'
+    },
+    {
+        value: 10,
+        label: '4000 Sq Ft - 5000 Sq Ft'
+    },
+    {
+        value: 11,
+        label: 'More 5000 Sq Ft'
     },
 ];
 const bedrooms_list = [
@@ -108,6 +131,10 @@ const bedrooms_list = [
         value: 6,
         label: '6 Bedrooms'
     },
+    {
+        value: 7,
+        label: '0 Bedrooms'
+    },
 ];
 const bathrooms_list = [
     {
@@ -134,6 +161,18 @@ const bathrooms_list = [
         value: 6,
         label: '6 Bathrooms'
     },
+    {
+        value: 7,
+        label: '7 Bathrooms'
+    },
+    {
+        value: 8,
+        label: '8 Bathrooms'
+    },
+    {
+        value: 9,
+        label: '0 Bathrooms'
+    },
 ];
 
 function InputMask() {
@@ -157,9 +196,11 @@ export default function BookSchedule() {
 
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
-    const [service, setService] = useState('')
-    const [bedrooms, setBedrooms] = useState('')
+    const [service, setService] = useState('Regular Cleaning')
+    const [bedrooms, setBedrooms] = useState('1 Bedrooms')
     const [bathrooms, setBathrooms] = useState('')
+    const [price, setPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
     const [date, setDate] = useState('')
     const [time, setTime] = useState('')
     const [address, setAddress] = useState('')
@@ -188,7 +229,7 @@ export default function BookSchedule() {
             case 'name':
                 setNameDirty(true)
                 break
-            case 'phone' :
+            case 'phone':
                 setPhoneDirty(true)
                 break
             default:
@@ -235,6 +276,28 @@ export default function BookSchedule() {
         setAddress(e.target.value)
 
     }
+
+    useEffect(() => {
+        const bedroomsCount = Number(bedrooms.split(' ')[0]) || 0;
+        const bathroomsCount = Number(bathrooms.split(' ')[0]) || 0;
+        const premiumService = ['After Repair', 'Move-in/ Move-out', 'Deep Cleaning'].includes(service);
+
+        if (premiumService) {
+            const minPrice = 80 + (bedroomsCount * 40) + (bathroomsCount * 40);
+            const rangeMaxPrice = 60 + (bedroomsCount * 60) + (bathroomsCount * 60);
+            setPrice(minPrice);
+            setMaxPrice(rangeMaxPrice);
+            return;
+        }
+
+        const hourlyRate = 90;
+        const minHours = 1.3333 + Math.max(0, bedroomsCount - 1) * 0.75 + Math.max(0, bathroomsCount - 1) * 0.1667;
+        const maxHours = 1.6667 + Math.max(0, bedroomsCount - 1) * 0.8333 + Math.max(0, bathroomsCount - 1) * 0.1667;
+        setPrice(Math.round(minHours * hourlyRate));
+        setMaxPrice(Math.round(maxHours * hourlyRate));
+    }, [service, bedrooms, bathrooms])
+
+
     const dateHandler = (e) => {
         setDate(e.$D, e.$M + 1, e.$y)
     }
@@ -248,85 +311,120 @@ export default function BookSchedule() {
         const message =
             `New order!!!${'%0A'}Name: ${name}${'%0A'}Phone: ${phone}${'%0A'}Date: ${date}${'%0A'}Time : ${time}${'%0A'}Address: ${address}${'%0A'}Type of Service: ${service} ${'%0A'}Total Square Footage: ${squareFootage}${'%0A'}Bedrooms: ${bedrooms}${'%0A'}Bathrooms: ${bathrooms}${'%0A'}`
         await sendMessage(message)
-        enqueueSnackbar('The message was successfully sent!!', {variant: 'success'});
+        enqueueSnackbar('The message was successfully sent!!', { variant: 'success' });
         setName('');
         setPhone('');
         setFormValid(false);
 
 
     };
+    const [step, setStep] = React.useState(1)
 
     return (
         <ThemeProvider theme={theme}>
-                <Box
-                    id={'form'}
-                    className={'form'}
-                    component="form"
-                    sx={{
-                        margin: '0 auto 50px',
-                        textAlign: 'center',
-                        '& .MuiTextField-root': {m: 1, margin: '0', textAlign: 'left', width: '100%'},
-                        '& .MuiFormControl-root': {padding: '10px 8px 8px',},
-                        '& .MuiInputLabel-root': {
-                            marginBottom: '10px'
-                        },
-                        '& .MuiStack-root': {padding: '0', width: '100%'}
-                    }}
-                    noValidate
-                    autoComplete="off"
-                >
-                    <div><h3>Book your cleaning 2 minutes!</h3></div>
+            <Box
+                id={'form'}
+                className={'form'}
+                component="form"
+                sx={{
+                    margin: '0 auto 50px',
+                    textAlign: 'center',
+                    '& .MuiTextField-root': { m: 1, margin: '0', textAlign: 'left', width: '100%' },
+                    '& .MuiFormControl-root': { padding: '10px 8px 8px', },
+                    '& .MuiInputLabel-root': {
+                        marginBottom: '10px'
+                    },
+                    '& .MuiStack-root': { padding: '0', width: '100%' }
+                }}
+                noValidate
+                autoComplete="off"
+            >
+                <div className={'logo'}>
+                    <h3>
+                        Book your cleaning 2 minutes!
+                    </h3>
 
-                    <div>
-                        <FormControl
-                            className={'width60ch'}
-
-                        >
-                            <InputLabel shrink htmlFor="bootstrap-input" size='medium'>
-                                {[(nameError && nameDirty) ? <h4 className={' form_name Error'}>{nameError}</h4> :
-                                    <h4 className={'form_name'}>Name</h4>]}
-                            </InputLabel>
-                            <TextField
-                                multiline
-                                id="outlined-textarea"
-                                placeholder="Jones Williams"
-                                name={'name'}
-                                onChange={e => nameHandler(e)}
-                                onBlur={e => blurHandler(e)}
-                            >
-                            </TextField>
-                        </FormControl>
-                        <FormControl
-                            className={'width60ch'}
-                        >
-                            <InputLabel shrink htmlFor="bootstrap-input">
-                                {[(phoneError && phoneDirty) ? <h4 className={' form_name Error'}>{phoneError}</h4> :
-                                    <h4 className={'form_name'}>Phone</h4>]}
-                            </InputLabel>
-                            {/*<TextField
-                            id="outlined-select-currency"
-                            multiline
-                            type="tel"
-                            placeholder="+1 (331) 313-7082"
-                            name={'phone'}
-                            onChange={e => phoneHandler(e)}
-                            onBlur={e => blurHandler(e)}
-                        >
-
-
-                        */}
-                            <MuiTelInput name={'phone'}
-                                         defaultCountry="US" onChange={e => phoneHandler(e)}
-                                         onBlur={e => blurHandler(e)} value={phone}
-                                         inputProps={{maxLength: 20}}
-                            />
-
-
-                        </FormControl>
+                </div>
+                <div className={'progress'}>
+                    <div className={'step'}>
+                        <h5>1. Service</h5>
+                        <div className={'span'}
+                            style={step > 0 ?
+                                {
+                                    borderTopLeftRadius: "10px", borderBottomLeftRadius: '10px', opacity: 1
+                                }
+                                :
+                                {
+                                    borderTopLeftRadius: "10px", borderBottomLeftRadius: '10px', opacity: 0.3
+                                }
+                            }
+                        />
                     </div>
-                    <div>
+                    <div className={'step'}>
+                        <h5>2. Time</h5>
+                        <div className={'span'} style={step > 1 ? { opacity: 1 } : { opacity: 0.3 }} />
+                    </div>
+                    <div className={'step'}>
+                        <h5>3. Details</h5>
+                        <div className={'span'} style={step > 2 ? { opacity: 1 } : { opacity: 0.3 }} />
+                    </div>
+                    <div className={'step'}>
+                        <h5>4. Payment</h5>
+                        <div className={'span'} style={step > 3 ? { opacity: 1 } : { opacity: 0.3 }} />
+                    </div>
+                    <div className={'step'}>
+                        <h5>5. Done</h5>
+                        <div className={'span'}
+                            style={step > 4 ? {
+                                borderTopRightRadius: '10px',
+                                borderBottomRightRadius: '10px',
+                                opacity: 1
+                            }
+                                : { borderTopRightRadius: '10px', borderBottomRightRadius: '10px', opacity: 0.3 }} />
+                    </div>
+
+                </div>
+
+                <div className="select">
+                    {step < 4 && <h6>Please select service:</h6>}
+
+                    {step === 4 && (
+                        <div className="payment-summary">
+                            <div className="payment-badge">$</div>
+                            <h6 className="payment-title">
+                                Estimated Cost Range
+                            </h6>
+                            <div className="payment-range">${price} - ${maxPrice}</div>
+                            <div className="payment-divider" />
+                            <div className="payment-row">
+                                <span className="payment-row-icon payment-row-icon-home"><HomeOutlinedIcon /></span>
+                                <p className="payment-row-text">
+                                    Final pricing may vary based on your home's condition and the amount of cleaning required.
+                                </p>
+                            </div>
+                            <div className="payment-row">
+                                <span className="payment-row-icon payment-row-icon-shield"><ShieldOutlinedIcon /></span>
+                                <p className="payment-row-text">
+                                    Payment is collected after the service is completed.
+                                </p>
+                            </div>
+                        </div>
+                    )}
+
+                    {step === 5 && (
+                        <h6 className="application">
+                            Your booking request has been submitted.
+                        </h6>
+                    )}
+                </div>
+
+                {step === 1 &&
+                    <div className={'FormControl'}>
                         <FormControl
-                            className={'width60ch'}
+                            sx={{
+                                /* width: {lg: '39ch', md: '70ch', sm: '70ch', xs: '38ch'},*/
+                                width: "100%"
+                            }}
                         >
                             <InputLabel shrink htmlFor="bootstrap-input" size='medium'>
                                 <h4 className={'form_name'}>Type of Service</h4>
@@ -337,7 +435,7 @@ export default function BookSchedule() {
                                 id="outlined-select-currency"
                                 select
                                 placeholder="Type of Service"
-                                defaultValue="Type of Service"
+                                defaultValue={service}
                                 onChange={e => serviceHandler(e)}
 
                             >
@@ -353,10 +451,12 @@ export default function BookSchedule() {
                             </TextField>
                         </FormControl>
                         <FormControl
+                            className={'width30ch'}
+
                             sx={{
                                 padding: '0 !important',
                             }}>
-                            <div style={{display: 'flex'}}>
+                            <div style={{ display: 'flex' }}>
                                 <FormControl
                                     className={'width30ch'}
                                 >
@@ -366,7 +466,7 @@ export default function BookSchedule() {
                                     <TextField
                                         id="outlined-select-currency"
                                         select
-                                        defaultValue="Bedrooms"
+                                        defaultValue="1 Bedrooms"
                                         onChange={e => bedroomsHandler(e)}
                                     >
                                         <MenuItem disabled value="Bedrooms">
@@ -405,60 +505,99 @@ export default function BookSchedule() {
                                 </FormControl>
                             </div>
                         </FormControl>
+
                     </div>
+                }
+                {step === 2 && <div>
+                    <FormControl
+                        className={'width60ch'}
+                    >
+                        <InputLabel shrink htmlFor="bootstrap-input" size='medium'>
+                            <h4 className={'form_name'}>Date (time)</h4>
+                        </InputLabel>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DemoContainer
+
+                                components={[
+                                    'DatePicker',
+                                ]}
+
+                            >
+                                <DemoItem>
+                                    <DatePicker
+                                        onChange={e => dateHandler(e)}
+                                        defaultValue={today}
+                                        disablePast
+                                        views={['year', 'month', 'day']}
+                                    />
+                                </DemoItem>
+
+
+                            </DemoContainer>
+                        </LocalizationProvider>
+                    </FormControl>
+                    <FormControl
+                        className={'width60ch'}>
+                        <InputLabel shrink htmlFor="bootstrap-input">
+                            <h4 className={'form_name'}>Time</h4>
+                        </InputLabel>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}
+                        >
+                            <DemoContainer components={['TimePicker']}
+                            >
+                                <TimePicker
+                                    onChange={e => timeHandler(e)}
+                                    label=""
+                                    viewRenderers={{
+                                        hours: renderTimeViewClock,
+                                        minutes: renderTimeViewClock,
+                                        seconds: renderTimeViewClock,
+                                    }}
+
+                                />
+                            </DemoContainer>
+                        </LocalizationProvider>
+
+                    </FormControl>
+                </div>
+                }
+                {step === 3 && <div>
                     <div>
                         <FormControl
                             className={'width60ch'}
+
                         >
                             <InputLabel shrink htmlFor="bootstrap-input" size='medium'>
-                                <h4 className={'form_name'}>Date (time)</h4>
+                                {[(nameError && nameDirty) ?
+                                    <h4 className={' form_name Error'}>{nameError}</h4> :
+                                    <h4 className={'form_name'}>Name</h4>]}
                             </InputLabel>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DemoContainer
-
-                                    components={[
-                                        'DatePicker',
-                                    ]}
-
-                                >
-                                    <DemoItem>
-                                        <DatePicker
-                                            onChange={e => dateHandler(e)}
-                                            defaultValue={today}
-                                            disablePast
-                                            views={['year', 'month', 'day']}
-                                        />
-                                    </DemoItem>
-
-
-                                </DemoContainer>
-                            </LocalizationProvider>
+                            <TextField
+                                multiline
+                                id="outlined-textarea"
+                                placeholder="Jones Williams"
+                                name={'name'}
+                                onChange={e => nameHandler(e)}
+                                onBlur={e => blurHandler(e)}
+                            >
+                            </TextField>
                         </FormControl>
                         <FormControl
-                            className={'width60ch'}>
+                            className={'width60ch'}
+                        >
                             <InputLabel shrink htmlFor="bootstrap-input">
-                                <h4 className={'form_name'}>Time</h4>
+                                {[(phoneError && phoneDirty) ?
+                                    <h4 className={' form_name Error'}>{phoneError}</h4> :
+                                    <h4 className={'form_name'}>Phone</h4>]}
                             </InputLabel>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}
-                            >
-                                <DemoContainer components={['TimePicker']}
-                                >
-                                    <TimePicker
-                                        onChange={e => timeHandler(e)}
-                                        label=""
-                                        viewRenderers={{
-                                            hours: renderTimeViewClock,
-                                            minutes: renderTimeViewClock,
-                                            seconds: renderTimeViewClock,
-                                        }}
+                            <MuiTelInput name={'phone'}
+                                defaultCountry="US" onChange={e => phoneHandler(e)}
+                                onBlur={e => blurHandler(e)} value={phone}
+                                inputProps={{ maxLength: 20 }}
+                            />
 
-                                    />
-                                </DemoContainer>
-                            </LocalizationProvider>
 
-                        </FormControl>
-
-                    </div>
+                        </FormControl></div>
                     <div>
                         <FormControl
                             className={'width60ch'}>
@@ -501,14 +640,95 @@ export default function BookSchedule() {
 
                         </FormControl>
                     </div>
-                    <div className={'button'}>
-                        <Button variant="contained" sx={{p: 2, width: '300px', margin: '0 auto'}}
-                                onClick={handleSubmit}
-                                disabled={!formValid}>
-                            Request a Quote
-                        </Button>
+                </div>}
+
+                {step === 5 && <div className={'applicationBox'}>
+                    <div className={'application'}>
+                        <h6>Name:&nbsp;</h6>
+                        <p>{name}</p>
                     </div>
-                </Box>
+                    <div className={'application'}>
+                        <h6>Phone:&nbsp;</h6>
+                        <p>{phone}</p>
+                    </div>
+                    <div className={'application'}>
+                        <h6>Date:&nbsp;</h6>
+                        <p>{date}</p>
+                    </div>
+                    <div className={'application'}>
+                        <h6>Time:&nbsp;</h6>
+                        <p>{time}</p>
+                    </div>
+                    <div className={'application'}>
+                        <h6>Address:&nbsp;</h6>
+                        <p>{address}</p>
+                    </div>
+                    <div className={'application service'}>
+                        <h6>Type of Service:&nbsp;</h6>
+                        <p>{service}</p>
+                    </div>
+                    <div className={'application squareFootage'}>
+                        <h6>Total Square Footage:&nbsp;</h6>
+                        <p>{squareFootage}</p>
+                    </div>
+                    <div className={'application'}>
+                        <h6>Bedrooms: &nbsp;</h6>
+                        <p>{bedrooms}</p>
+                    </div>
+                    <div className={'application'}>
+                        <h6>Bathrooms:&nbsp; </h6>
+                        <p>{bathrooms}</p>
+                    </div>
+                    {!formValid &&
+                        <div className={'formValid'}>
+                            <h6>
+                                You need to fill in all the fields
+                            </h6>
+                        </div>
+                    }
+
+
+                </div>}
+
+                <div className={'line'} />
+                <div className={'button_Box'}>
+                    {step > 1 ?
+                        <Button
+                            sx={{ padding: '10px 35px' }}
+
+                            onClick={() => {
+                                setStep(step - 1)
+                            }}
+
+                            variant="contained"
+                            color={'primary'}>BACK</Button>
+                        : <span />
+                    }
+
+                    {step !== 5 ? <Button
+                        sx={{ padding: '10px 35px' }}
+
+                        onClick={() => {
+                            setStep(step + 1)
+                        }}
+                        variant="contained"
+                        color={'primary'}
+                    >NEXT</Button>
+                        :
+                        <Button
+                            sx={{ padding: '10px 35px' }}
+                            variant="contained"
+                            onClick={handleSubmit}
+                            disabled={!formValid}>
+                            Confirm
+                        </Button>
+                    }
+                </div>
+
+                <div className={'ellipse ellipse__one'}></div>
+                <div className={'ellipse ellipse__two'}></div>
+                <div className={'ellipse ellipse__three'}></div>
+            </Box>
         </ThemeProvider>
     );
 }

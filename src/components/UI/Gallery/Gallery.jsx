@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState} from 'react';
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react';
 
@@ -17,11 +17,11 @@ import RegularCleaning from "../../TypeCleaning/RegularCleaning";
 import DeepCleaning from "../../TypeCleaning/DeepCleaning";
 import MoveInCleaning from "../../TypeCleaning/MoveInCleaning";
 import CleaningAfter from "../../TypeCleaning/CleaningAfter";
-import OfficeCleaning from "../../TypeCleaning/OfficeCleaning";
-import OneTime from "../../TypeCleaning/OneTime";
+//import OfficeCleaning from "../../TypeCleaning/OfficeCleaning";
+//import OneTime from "../../TypeCleaning/OneTime";
 import Box from "@mui/material/Box";
-import PetsCleaning from "../../TypeCleaning/PetsCleaning";
-import HolidayCleaning from "../../TypeCleaning/HolidayCleaning";
+//import PetsCleaning from "../../TypeCleaning/PetsCleaning";
+//import HolidayCleaning from "../../TypeCleaning/HolidayCleaning";
 
 export default function Gallery() {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -41,7 +41,7 @@ export default function Gallery() {
 
                 thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
 
-                modules={[FreeMode, Navigation, Thumbs, Mousewheel, Keyboard,HashNavigation]}
+                modules={[FreeMode, Navigation, Thumbs, Mousewheel, Keyboard, HashNavigation]}
 
 
                 hashNavigation={{
@@ -57,11 +57,11 @@ export default function Gallery() {
                     id={'regular-cleaning'}>
                     <RegularCleaning/>
                 </SwiperSlide>
-                <SwiperSlide
+{/*                <SwiperSlide
                     data-hash={'one-time'}
                     id={'one-time'}>
                     <OneTime/>
-                </SwiperSlide>
+                </SwiperSlide>*/}
                 <SwiperSlide
                     data-hash={'move-in-cleaning'}
                     id={'move-in-cleaning'}>
@@ -72,27 +72,27 @@ export default function Gallery() {
                     id={'cleaning-after'}>
                     <CleaningAfter/>
                 </SwiperSlide>
-                <SwiperSlide
+{/*                <SwiperSlide
                     data-hash={'office-cleaning'}
                     id={'office-cleaning'}
                 >
                     <OfficeCleaning/>
-                </SwiperSlide>
+                </SwiperSlide>*/}
                 <SwiperSlide
-                data-hash={'deep-cleaning'}
-                id={'deep-cleaning'}>
+                    data-hash={'deep-cleaning'}
+                    id={'deep-cleaning'}>
                     <DeepCleaning/>
                 </SwiperSlide>
-                <SwiperSlide
+{/*                <SwiperSlide
                     data-hash={'pets-cleaning'}
                     id={'pets-cleaning'}>
                     <PetsCleaning/>
-                </SwiperSlide>
-                <SwiperSlide
+                </SwiperSlide>*/}
+{/*                <SwiperSlide
                     data-hash={'holiday-cleaning'}
                     id={'holiday-cleaning'}>
                     <HolidayCleaning/>
-                </SwiperSlide>
+                </SwiperSlide>*/}
 
 
             </Swiper>
@@ -108,51 +108,53 @@ export default function Gallery() {
                 <SwiperSlide>
                     <div className={'group Regular'}>
                         <h4>Regular Cleaning</h4>
-                        <p>$40 /maid-hour</p>
+                        {/*<p>/!*<span className={'Discounto'}>$40</span>*!/$40 /maid-hour</p>*/}
                     </div>
                 </SwiperSlide>
-                <SwiperSlide>
+{/*                <SwiperSlide>
                     <div className={'group OneTime'}>
                         <h4>One - Time Cleaning</h4>
-                        <p>$45 /maid-hour</p>
+                        <p><span className={'Discounto'}>$45</span>$41 /maid-hour</p>
                     </div>
-                </SwiperSlide>
+                </SwiperSlide>*/}
                 <SwiperSlide>
                     <div className={'group Move_in'}>
                         <h4>Move-in/ Move-out Cleaning</h4>
-                        <p>$47 /maid-hour</p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className={'group Office'}>
-                        <h4>After Repair Cleaning</h4>
-                        <p>48 /maid-hour</p>
+                        {/*<p>/!*<span className={'Discounto'}>$47</span>*!/$43 /maid-hour</p>*/}
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className={'group After_Repair'}>
-                        <h4>Office Cleaning</h4>
-                        <p>$45 /maid-hour</p>
+                        <h4>After Repair Cleaning</h4>
+                        {/*<p>/!*<span className={'Discounto'}>$48</span>*!/$45 /maid-hour</p>*/}
                     </div>
                 </SwiperSlide>
+{/*                <SwiperSlide>
+                    <div className={'group After_Repair'}>
+                        <h4>Office Cleaning</h4>
+                        <p><span className={'Discounto'}>$45</span>$41 /maid-hour</p>
+                    </div>
+                </SwiperSlide>*/}
                 <SwiperSlide>
                     <div className={'group Deep'}>
                         <h4>Deep Cleaning</h4>
-                        <p>$50 /maid-hour</p>
+                        {/*<p> /!*<span className={'Discounto'}>$47</span>*!/$43/maid-hour</p>*/}
                     </div>
-                </SwiperSlide>
+                </SwiperSlide>{/*
                 <SwiperSlide>
                     <div className={'group Holiday'}>
                         <h4>Pets and a Clean Home</h4>
-                        <p>$47 /maid-hour</p>
+                        <p><span className={'Discounto'}>$47</span>$43/maid-hour</p>
+
                     </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </SwiperSlide>*/}
+{/*                <SwiperSlide>
                     <div className={'group Pets'}>
                         <h4>Holiday Cleaning</h4>
-                        <p>$40 /maid-hour</p>
+                        <p><span className={'Discounto'}>$40</span>$36 /maid-hour</p>
+
                     </div>
-                </SwiperSlide>
+                </SwiperSlide>*/}
 
             </Swiper>
 

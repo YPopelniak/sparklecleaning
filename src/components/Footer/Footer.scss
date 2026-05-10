@@ -217,12 +217,13 @@
 
       .link {
         margin: 0;
+        min-width: 100wh;
+
 
       }
 
       .links {
         margin: 0;
-        justify-content: center;
         display: grid;
 
         hr {
@@ -247,6 +248,7 @@
 
         a {
           justify-content: center;
+          margin-left: 20px;
           font-family: 'Work Sans', sans-serif;
           height: 24px;
           margin-bottom: 27px;
@@ -262,6 +264,13 @@
 
         }
 
+      }
+
+      .Services{
+        a{
+          margin-left: 0;
+          justify-content: center !important;
+        }
       }
     }
     .Copyright {

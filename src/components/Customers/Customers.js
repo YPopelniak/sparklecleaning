@@ -1,23 +1,38 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './Customers.css'
 import Box from "@mui/material/Box";
-import {FormControl, Grid, Pagination, Rating} from "@mui/material";
+import { FormControl, Grid, Pagination, Rating } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 
-import {createTheme, ThemeProvider} from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
-import {sendMessage} from "../../api/bookSchedule.ts";
-import {MuiTelInput} from "mui-tel-input";
-import {enqueueSnackbar} from "notistack";
+import { sendMessage } from "../../api/bookSchedule.ts";
+import { MuiTelInput } from "mui-tel-input";
+import { enqueueSnackbar } from "notistack";
 import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
 
+function sortReviewsByRatingDesc(items) {
+    return [...items].sort((a, b) => {
+        const ra = Number(a.Rating) || 0;
+        const rb = Number(b.Rating) || 0;
+        if (rb !== ra) {
+            return rb - ra;
+        }
+        const ida = Number(a.id);
+        const idb = Number(b.id);
+        if (!Number.isNaN(ida) && !Number.isNaN(idb) && ida !== idb) {
+            return idb - ida;
+        }
+        return 0;
+    });
+}
 
 const service_list = [
     {
@@ -107,10 +122,10 @@ function Customers() {
             case 'name':
                 setNameDirty(true)
                 break
-            case 'phone' :
+            case 'phone':
                 setPhoneDirty(true)
                 break
-            case 'comment' :
+            case 'comment':
                 setCommentDirty(true)
                 break
             default:
@@ -164,15 +179,20 @@ function Customers() {
     });
 
     useEffect(() => {
-            let data = axios.get('https://chicago-sparkle-elite-cleaning-default-rtdb.firebaseio.com/comments.json')
-            data.then(res => {
 
-                setCostomers(Object.values(res.data).reverse())
-                setAllPage(Math.ceil(Object.values(res.data).length / 3))
+        setTimeout(
+            () => {
+                let data = axios.get('https://chicago-sparkle-elite-cleaning-default-rtdb.firebaseio.com/comments.json')
+                data.then(res => {
+                    const list = res.data ? Object.values(res.data) : [];
+                    const sorted = sortReviewsByRatingDesc(list);
+                    setCostomers(sorted);
+                    setAllPage(Math.ceil(sorted.length / 3));
+                })
 
-            })
+            }, 1000);
 
-        }
+    }
 
         , [])
 
@@ -191,16 +211,15 @@ function Customers() {
                 Massage: comment,
                 Rating: rating,
                 Phone: phone,
-                steamy : Math.random()<0.5?0:1
             })
         }
         const res = await fetch('https://chicago-sparkle-elite-cleaning-default-rtdb.firebaseio.com/comments.json',
             options
         )
         if (res) {
-            enqueueSnackbar('The feedback was successfully sent!!', {variant: 'success'});
+            enqueueSnackbar('The feedback was successfully sent!!', { variant: 'success' });
         } else {
-            enqueueSnackbar('Error Occurred', {variant: 'error'})
+            enqueueSnackbar('Error Occurred', { variant: 'error' })
 
         }
 
@@ -232,14 +251,15 @@ function Customers() {
 
     return (
         <ThemeProvider theme={theme}>
-            <div className={'Customers'}>
+            <div className={'Customers'}
+                id={'customers'}>
                 <div className={'background'}>
                     <h3>Happy Customers</h3>
                 </div>
                 <Grid container className={'comments'}>
                     {costomers.slice((currentPage * 3) - 3, (currentPage * 3)).map((item) => (
                         <Grid item xs={12} md={4}>
-                            <div className={`comment ${item.steamy ? 'steamy' : 'none'}`}>
+                            <div className="comment">
                                 <h4>{item.Name}</h4>
                                 <h5>{item.Offering}</h5>
                                 <p className={`${name_list.includes(item.Name) ? 'none' : 'show'} `}>{item.Massage}</p>
@@ -259,18 +279,18 @@ function Customers() {
                                         value={item.Rating}
                                         readOnly
                                         precision={0.5}
-                                        emptyIcon={<StarIcon style={{opacity: 0.55}} fontSize="inherit"/>}
+                                        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                                     />
 
                                 </Box>
                                 <button className={`Button ${name_list.includes(item.Name) ? 'none' : 'More'}`}
-                                        onClick={() => LearnMore(item.Name)}
-                                     style={item.Massage.length < 300 ? {display:'none'} : null}
+                                    onClick={() => LearnMore(item.Name)}
+                                    style={item.Massage.length < 420 ? { display: 'none' } : null}
                                 >
                                     <p className={'More__p'}>Learn More</p>
 
                                     <span
-                                        className={`${name_list.includes(item.Name) ? 'none' : 'Swap'} ${(item.id % 2 === 0) ? 'steamy' : 'none'} `}><ExpandCircleDownOutlinedIcon/></span>
+                                        className={name_list.includes(item.Name) ? 'none' : 'Swap'}><ExpandCircleDownOutlinedIcon /></span>
 
                                 </button>
                             </div>
@@ -279,7 +299,7 @@ function Customers() {
                     ))}
                     <Grid item xs={12}>
                         <Pagination count={allPage} variant="outlined" shape="rounded" color={'primary'}
-                                    onChange={(event, value) => setCurrentPage(value)}
+                            onChange={(event, value) => setCurrentPage(value)}
                         />
                     </Grid>
 
@@ -296,7 +316,7 @@ function Customers() {
                             open={open}
                             onClose={handleClose}
                             closeAfterTransition
-                            slots={{backdrop: Backdrop}}
+                            slots={{ backdrop: Backdrop }}
                             slotProps={{
                                 backdrop: {
                                     timeout: 500,
@@ -305,16 +325,16 @@ function Customers() {
                         >
                             <Fade in={open}>
                                 <Box className={'Modal'}
-                                     sx={{
-                                         margin: '0 auto 50px',
-                                         textAlign: 'center',
-                                         '& .MuiTextField-root': {m: 1, margin: '0', textAlign: 'left', width: '100%'},
-                                         '& .MuiFormControl-root': {padding: '10px 8px 8px',},
-                                         '& .MuiInputLabel-root': {
-                                             marginBottom: '10px'
-                                         },
-                                         '& .MuiStack-root': {padding: '0', width: '100%'}
-                                     }}
+                                    sx={{
+                                        margin: '0 auto 50px',
+                                        textAlign: 'center',
+                                        '& .MuiTextField-root': { m: 1, margin: '0', textAlign: 'left', width: '100%' },
+                                        '& .MuiFormControl-root': { padding: '10px 8px 8px', },
+                                        '& .MuiInputLabel-root': {
+                                            marginBottom: '10px'
+                                        },
+                                        '& .MuiStack-root': { padding: '0', width: '100%' }
+                                    }}
 
                                 >
                                     <div>
@@ -347,9 +367,9 @@ function Customers() {
                                                     <h4 className={'form_name'}>Phone</h4>]}
                                             </InputLabel>
                                             <MuiTelInput name={'phone'}
-                                                         defaultCountry="US" onChange={e => phoneHandler(e)}
-                                                         onBlur={e => blurHandler(e)} value={phone}
-                                                         inputProps={{maxLength: 20}}
+                                                defaultCountry="US" onChange={e => phoneHandler(e)}
+                                                onBlur={e => blurHandler(e)} value={phone}
+                                                inputProps={{ maxLength: 20 }}
                                             />
 
 
@@ -424,7 +444,7 @@ function Customers() {
                                                 size="large"
                                                 name="text-feedback"
                                                 precision={0.5}
-                                                emptyIcon={<StarIcon style={{opacity: 0.55}} fontSize="inherit"/>}
+                                                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                                                 onChange={e => ratingHandler(e)}
 
                                             />
@@ -433,10 +453,10 @@ function Customers() {
 
 
                                     </div>
-                                    <div className={'button'}>
-                                        <Button variant="contained" sx={{p: 2, margin: '0 auto'}}
-                                                onClick={handleSubmit}
-                                                disabled={formValid}>
+                                    <div >
+                                        <Button className={'button'} variant="contained" sx={{ p: 2, margin: '0 auto' }}
+                                            onClick={handleSubmit}
+                                            disabled={formValid}>
                                             Leave feedback
                                         </Button>
                                     </div>

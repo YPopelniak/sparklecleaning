@@ -21,19 +21,6 @@
   justify-content: center;
   max-width: 1440px;
 }
-.Customers .comments .steamy {
-  background: #B5D5ED !important;
-  color: #FFFFFF;
-}
-.Customers .comments .steamy h4 {
-  color: #FFFFFF !important;
-}
-.Customers .comments .steamy h5 {
-  color: #FFFFFF !important;
-}
-.Customers .comments .steamy p {
-  color: #FFFFFF !important;
-}
 .Customers .comments .comment {
   width: 90%;
   height: auto;
@@ -163,6 +150,13 @@
   margin: 50px auto 0;
   justify-content: center;
   display: flex;
+}
+.Modal .button:disabled {
+  background-color: #003156;
+  opacity: 0.5;
+  color: #fff;
+  cursor: not-allowed;
+  pointer-events: auto;
 }
 @media only screen and (max-width: 700px) {
   .Modal {
