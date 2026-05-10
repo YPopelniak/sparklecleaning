@@ -54,7 +54,8 @@
 }
 .Offering .group {
   box-sizing: border-box;
-  z-index: -100;
+  position: relative;
+  z-index: 1;
   margin-top: -27px;
   padding: 0;
   border-radius: 5px;
@@ -203,7 +204,8 @@
   .Offering .group {
     justify-content: center;
     box-sizing: border-box;
-    z-index: -100;
+    position: relative;
+    z-index: 1;
     margin-top: -27px;
     border-radius: 5px;
     padding: 27px 8px;
@@ -265,7 +267,8 @@
   .Offering .group {
     justify-content: center;
     box-sizing: border-box;
-    z-index: -100;
+    position: relative;
+    z-index: 1;
     margin-top: -27px;
     border-radius: 5px;
     padding: 27px 4px;

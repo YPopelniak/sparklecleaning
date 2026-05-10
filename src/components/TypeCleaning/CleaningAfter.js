@@ -2,7 +2,7 @@ import React from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ConstructionOutlinedIcon from '@mui/icons-material/ConstructionOutlined';
 import BookScheduleButton from '../UI/BookScheduleButton/BookScheduleButton';
-import afterRepairHero from '../imgs/after_repair_hero.jpg';
+import afterRepairHero from '../imgs/after_repair.webp';
 import './CleaningAfter.css';
 
 const FEATURES = [
@@ -53,10 +53,10 @@ function CleaningAfter() {
                             <div className="ar-media__frame">
                                 <img
                                     src={afterRepairHero}
-                                    alt="Wet mopping a hardwood floor during post-renovation cleaning"
+                                    alt="Bright cleaned room interior after post-renovation deep cleaning"
                                     className="ar-media__img"
-                                    width={1920}
-                                    height={2400}
+                                    width={850}
+                                    height={478}
                                     loading="lazy"
                                 />
                             </div>

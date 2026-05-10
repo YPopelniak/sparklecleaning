@@ -124,7 +124,7 @@ export default function Gallery() {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className={'group Office'}>
+                    <div className={'group After_Repair'}>
                         <h4>After Repair Cleaning</h4>
                         {/*<p>/!*<span className={'Discounto'}>$48</span>*!/$45 /maid-hour</p>*/}
                     </div>

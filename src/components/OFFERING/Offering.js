@@ -8,7 +8,7 @@ import Regular from '../imgs/Regular.jpeg'
 import Move_in from '../imgs/Move-in.jpeg'
 
 //import Office from '../imgs/Office.jpeg'
-import After_Repair from '../imgs/After_Repair .webp'
+import After_Repair from '../imgs/after_repair.webp'
 import Deep from '../imgs/Deep.png'
 
 
