@@ -58,7 +58,7 @@
 .form .select {
   margin: 0 40px 0;
 }
-.form .select h6 {
+.form .select > h6 {
   text-align: left;
   margin: 20px auto 30px;
   padding: 0 0 0 0;
@@ -75,6 +75,90 @@
 .form .select .application {
   color: #003156;
   font-size: 22px;
+}
+.form .payment-summary {
+  text-align: center;
+  margin: 28px auto 18px;
+  max-width: 860px;
+  background: #f7f9fc;
+  border: 1px solid #e4ebf3;
+  border-radius: 18px;
+  padding: 18px 36px 20px;
+  box-shadow: 0 4px 16px rgba(0, 49, 86, 0.05);
+}
+.form .payment-badge {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  border: 1px solid #deebf7;
+  background: linear-gradient(180deg, #f4f9ff 0%, #eaf2fb 100%);
+  color: #1d67a5;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 72px;
+}
+.form .payment-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+  color: #1d67a5;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.form .payment-range {
+  margin: 6px 0 10px;
+  color: #003156;
+  font-size: 62px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.08;
+}
+.form .payment-divider {
+  height: 1px;
+  width: 62%;
+  margin: 8px auto 14px;
+  background: #ccd6e4;
+}
+.form .payment-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  padding: 8px 0;
+}
+.form .payment-row + .payment-row {
+  border-top: 1px dashed #e4ebf3;
+}
+.form .payment-row-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.form .payment-row-icon svg {
+  width: 16px;
+  height: 16px;
+}
+.form .payment-row-icon-home {
+  color: #2f7bc1;
+  background: #e8f3ff;
+}
+.form .payment-row-icon-shield {
+  color: #34a172;
+  background: #e9f8f0;
+}
+.form .payment-row-text {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.45;
+  color: #2f3f52;
+  font-weight: 500;
 }
 .form .line {
   margin: 30px auto 0;
@@ -212,6 +296,46 @@
   }
   .form .select .application {
     font-size: 16px;
+  }
+  .form .payment-summary {
+    margin: 16px auto 10px;
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+  .form .payment-badge {
+    width: 52px;
+    height: 52px;
+    line-height: 52px;
+    font-size: 24px;
+  }
+  .form .payment-title {
+    font-size: 15px;
+    letter-spacing: 0.8px;
+  }
+  .form .payment-range {
+    font-size: 44px;
+    margin: 4px 0 8px;
+  }
+  .form .payment-divider {
+    width: 88%;
+    margin: 8px auto 10px;
+  }
+  .form .payment-row {
+    gap: 10px;
+    padding: 7px 0;
+  }
+  .form .payment-row-icon {
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+  }
+  .form .payment-row-icon svg {
+    width: 13px;
+    height: 13px;
+  }
+  .form .payment-row-text {
+    font-size: 15px;
+    line-height: 1.35;
   }
   .form .applicationBox {
     margin: 30px 20px 0;

@@ -19,17 +19,11 @@ function BookScheduleButton( props) {
     return (
         <ThemeProvider theme={theme}>
             <Box
+                className="svc-book-btn-wrap"
                 sx={{
                     '& .MuiButtonBase-root': {
-                        width: '236px',
-                        height: '53px',
-                        padding: '15px 35px',
-                        borderRadius: '50px',
-                        textTransform: 'none',
-                        fontSize: '18px',
-                        fontWeight: 500,
-                        alignItems:'center'
-                }
+                        alignItems: 'center',
+                    },
                 }}
             ><a href={'#form'}>
                 <Button

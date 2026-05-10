@@ -3,34 +3,28 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from "@mui/material/InputLabel";
-import {Button, FormControl} from "@mui/material";
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
+import { Button, FormControl } from "@mui/material";
 import './BookSchedule.css'
-import {useEffect, useState} from "react";
-import {sendMessage} from "../../api/bookSchedule.ts";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {DemoContainer, DemoItem} from "@mui/x-date-pickers/internals/demo";
-import {DatePicker} from "@mui/x-date-pickers/DatePicker";
-import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
+import { useEffect, useState } from "react";
+import { sendMessage } from "../../api/bookSchedule.ts";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import dayjs from 'dayjs';
-import {renderTimeViewClock, TimePicker} from "@mui/x-date-pickers";
+import { renderTimeViewClock, TimePicker } from "@mui/x-date-pickers";
 import * as PropTypes from "prop-types";
-import {MuiTelInput} from 'mui-tel-input'
-import {enqueueSnackbar} from 'notistack';
+import { MuiTelInput } from 'mui-tel-input'
+import { enqueueSnackbar } from 'notistack';
 
 
 
 
 const today = dayjs();
-
-const Price_list = {
-    'Regular Cleaning': 40,
-    'After Repair': 43,
-    'Move-in/ Move-out': 45,
-    'Deep Cleaning': 43
-}
-
 
 const service_list = [
     {
@@ -169,6 +163,14 @@ const bathrooms_list = [
     },
     {
         value: 7,
+        label: '7 Bathrooms'
+    },
+    {
+        value: 8,
+        label: '8 Bathrooms'
+    },
+    {
+        value: 9,
         label: '0 Bathrooms'
     },
 ];
@@ -198,6 +200,7 @@ export default function BookSchedule() {
     const [bedrooms, setBedrooms] = useState('1 Bedrooms')
     const [bathrooms, setBathrooms] = useState('')
     const [price, setPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
     const [date, setDate] = useState('')
     const [time, setTime] = useState('')
     const [address, setAddress] = useState('')
@@ -226,7 +229,7 @@ export default function BookSchedule() {
             case 'name':
                 setNameDirty(true)
                 break
-            case 'phone' :
+            case 'phone':
                 setPhoneDirty(true)
                 break
             default:
@@ -275,7 +278,23 @@ export default function BookSchedule() {
     }
 
     useEffect(() => {
-        setPrice(Number(Price_list[service]) + Number((bedrooms.split(' ')[0] * 10)) + Number((bathrooms.split(' ')[0] * 25)))
+        const bedroomsCount = Number(bedrooms.split(' ')[0]) || 0;
+        const bathroomsCount = Number(bathrooms.split(' ')[0]) || 0;
+        const premiumService = ['After Repair', 'Move-in/ Move-out', 'Deep Cleaning'].includes(service);
+
+        if (premiumService) {
+            const minPrice = 80 + (bedroomsCount * 40) + (bathroomsCount * 40);
+            const rangeMaxPrice = 60 + (bedroomsCount * 60) + (bathroomsCount * 60);
+            setPrice(minPrice);
+            setMaxPrice(rangeMaxPrice);
+            return;
+        }
+
+        const hourlyRate = 90;
+        const minHours = 1.3333 + Math.max(0, bedroomsCount - 1) * 0.75 + Math.max(0, bathroomsCount - 1) * 0.1667;
+        const maxHours = 1.6667 + Math.max(0, bedroomsCount - 1) * 0.8333 + Math.max(0, bathroomsCount - 1) * 0.1667;
+        setPrice(Math.round(minHours * hourlyRate));
+        setMaxPrice(Math.round(maxHours * hourlyRate));
     }, [service, bedrooms, bathrooms])
 
 
@@ -292,22 +311,14 @@ export default function BookSchedule() {
         const message =
             `New order!!!${'%0A'}Name: ${name}${'%0A'}Phone: ${phone}${'%0A'}Date: ${date}${'%0A'}Time : ${time}${'%0A'}Address: ${address}${'%0A'}Type of Service: ${service} ${'%0A'}Total Square Footage: ${squareFootage}${'%0A'}Bedrooms: ${bedrooms}${'%0A'}Bathrooms: ${bathrooms}${'%0A'}`
         await sendMessage(message)
-        enqueueSnackbar('The message was successfully sent!!', {variant: 'success'});
+        enqueueSnackbar('The message was successfully sent!!', { variant: 'success' });
         setName('');
         setPhone('');
         setFormValid(false);
 
 
     };
-    const [open, setOpen] = React.useState(false);
     const [step, setStep] = React.useState(1)
-
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => {
-        setOpen(false);
-
-
-    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -318,12 +329,12 @@ export default function BookSchedule() {
                 sx={{
                     margin: '0 auto 50px',
                     textAlign: 'center',
-                    '& .MuiTextField-root': {m: 1, margin: '0', textAlign: 'left', width: '100%'},
-                    '& .MuiFormControl-root': {padding: '10px 8px 8px',},
+                    '& .MuiTextField-root': { m: 1, margin: '0', textAlign: 'left', width: '100%' },
+                    '& .MuiFormControl-root': { padding: '10px 8px 8px', },
                     '& .MuiInputLabel-root': {
                         marginBottom: '10px'
                     },
-                    '& .MuiStack-root': {padding: '0', width: '100%'}
+                    '& .MuiStack-root': { padding: '0', width: '100%' }
                 }}
                 noValidate
                 autoComplete="off"
@@ -338,55 +349,81 @@ export default function BookSchedule() {
                     <div className={'step'}>
                         <h5>1. Service</h5>
                         <div className={'span'}
-                             style={step > 0 ?
-                                 {
-                                     borderTopLeftRadius: "10px", borderBottomLeftRadius: '10px', opacity: 1
-                                 }
-                                 :
-                                 {
-                                     borderTopLeftRadius: "10px", borderBottomLeftRadius: '10px', opacity: 0.3
-                                 }
-                             }
+                            style={step > 0 ?
+                                {
+                                    borderTopLeftRadius: "10px", borderBottomLeftRadius: '10px', opacity: 1
+                                }
+                                :
+                                {
+                                    borderTopLeftRadius: "10px", borderBottomLeftRadius: '10px', opacity: 0.3
+                                }
+                            }
                         />
                     </div>
                     <div className={'step'}>
                         <h5>2. Time</h5>
-                        <div className={'span'} style={step > 1 ? {opacity: 1} : {opacity: 0.3}}/>
+                        <div className={'span'} style={step > 1 ? { opacity: 1 } : { opacity: 0.3 }} />
                     </div>
                     <div className={'step'}>
                         <h5>3. Details</h5>
-                        <div className={'span'} style={step > 2 ? {opacity: 1} : {opacity: 0.3}}/>
+                        <div className={'span'} style={step > 2 ? { opacity: 1 } : { opacity: 0.3 }} />
                     </div>
                     <div className={'step'}>
                         <h5>4. Payment</h5>
-                        <div className={'span'} style={step > 3 ? {opacity: 1} : {opacity: 0.3}}/>
+                        <div className={'span'} style={step > 3 ? { opacity: 1 } : { opacity: 0.3 }} />
                     </div>
                     <div className={'step'}>
                         <h5>5. Done</h5>
                         <div className={'span'}
-                             style={step > 4 ? {
-                                     borderTopRightRadius: '10px',
-                                     borderBottomRightRadius: '10px',
-                                     opacity: 1
-                                 }
-                                 : {borderTopRightRadius: '10px', borderBottomRightRadius: '10px', opacity: 0.3}}/>
+                            style={step > 4 ? {
+                                borderTopRightRadius: '10px',
+                                borderBottomRightRadius: '10px',
+                                opacity: 1
+                            }
+                                : { borderTopRightRadius: '10px', borderBottomRightRadius: '10px', opacity: 0.3 }} />
                     </div>
 
                 </div>
 
-                <div className={'select'}>
-                    { step < 4 && <h6>Please select service:</h6>}
-                    {step === 4 && <h6 className={'pay'}>Estimated cost of ${price} to ${Math.ceil(price * 1.35)}. Payment is made on place</h6>}
-                    {step === 5 && <h6 className={'application'}>Your application </h6>}
+                <div className="select">
+                    {step < 4 && <h6>Please select service:</h6>}
 
+                    {step === 4 && (
+                        <div className="payment-summary">
+                            <div className="payment-badge">$</div>
+                            <h6 className="payment-title">
+                                Estimated Cost Range
+                            </h6>
+                            <div className="payment-range">${price} - ${maxPrice}</div>
+                            <div className="payment-divider" />
+                            <div className="payment-row">
+                                <span className="payment-row-icon payment-row-icon-home"><HomeOutlinedIcon /></span>
+                                <p className="payment-row-text">
+                                    Final pricing may vary based on your home's condition and the amount of cleaning required.
+                                </p>
+                            </div>
+                            <div className="payment-row">
+                                <span className="payment-row-icon payment-row-icon-shield"><ShieldOutlinedIcon /></span>
+                                <p className="payment-row-text">
+                                    Payment is collected after the service is completed.
+                                </p>
+                            </div>
+                        </div>
+                    )}
+
+                    {step === 5 && (
+                        <h6 className="application">
+                            Your booking request has been submitted.
+                        </h6>
+                    )}
                 </div>
 
                 {step === 1 &&
                     <div className={'FormControl'}>
                         <FormControl
                             sx={{
-                               /* width: {lg: '39ch', md: '70ch', sm: '70ch', xs: '38ch'},*/
-                                width:"100%"
+                                /* width: {lg: '39ch', md: '70ch', sm: '70ch', xs: '38ch'},*/
+                                width: "100%"
                             }}
                         >
                             <InputLabel shrink htmlFor="bootstrap-input" size='medium'>
@@ -419,7 +456,7 @@ export default function BookSchedule() {
                             sx={{
                                 padding: '0 !important',
                             }}>
-                            <div style={{display: 'flex'}}>
+                            <div style={{ display: 'flex' }}>
                                 <FormControl
                                     className={'width30ch'}
                                 >
@@ -554,9 +591,9 @@ export default function BookSchedule() {
                                     <h4 className={'form_name'}>Phone</h4>]}
                             </InputLabel>
                             <MuiTelInput name={'phone'}
-                                         defaultCountry="US" onChange={e => phoneHandler(e)}
-                                         onBlur={e => blurHandler(e)} value={phone}
-                                         inputProps={{maxLength: 20}}
+                                defaultCountry="US" onChange={e => phoneHandler(e)}
+                                onBlur={e => blurHandler(e)} value={phone}
+                                inputProps={{ maxLength: 20 }}
                             />
 
 
@@ -643,21 +680,21 @@ export default function BookSchedule() {
                         <p>{bathrooms}</p>
                     </div>
                     {!formValid &&
-                    <div className={'formValid'}>
-                        <h6>
-                            You need to fill in all the fields
-                        </h6>
-                    </div>
+                        <div className={'formValid'}>
+                            <h6>
+                                You need to fill in all the fields
+                            </h6>
+                        </div>
                     }
 
 
                 </div>}
 
-                <div className={'line'}/>
+                <div className={'line'} />
                 <div className={'button_Box'}>
                     {step > 1 ?
                         <Button
-                            sx={{padding:'10px 35px'}}
+                            sx={{ padding: '10px 35px' }}
 
                             onClick={() => {
                                 setStep(step - 1)
@@ -665,24 +702,24 @@ export default function BookSchedule() {
 
                             variant="contained"
                             color={'primary'}>BACK</Button>
-                        : <span/>
+                        : <span />
                     }
 
                     {step !== 5 ? <Button
-                            sx={{padding:'10px 35px'}}
+                        sx={{ padding: '10px 35px' }}
 
-                            onClick={() => {
+                        onClick={() => {
                             setStep(step + 1)
                         }}
                         variant="contained"
                         color={'primary'}
-                        >NEXT</Button>
+                    >NEXT</Button>
                         :
                         <Button
-                            sx={{padding:'10px 35px'}}
+                            sx={{ padding: '10px 35px' }}
                             variant="contained"
-                                onClick={handleSubmit}
-                                disabled={!formValid}>
+                            onClick={handleSubmit}
+                            disabled={!formValid}>
                             Confirm
                         </Button>
                     }

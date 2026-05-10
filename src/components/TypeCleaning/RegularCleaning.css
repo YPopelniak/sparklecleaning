@@ -1,0 +1,123 @@
+/* Regular cleaning — extends service-design-system tokens */
+.wi-section.wi-section {
+  max-width: none;
+}
+
+.wi-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  margin: 0 0 8px;
+}
+
+.wi-title-sparkles {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wi-sparkle-svg {
+  flex-shrink: 0;
+  display: block;
+}
+
+.wi-subtitle {
+  text-align: center;
+}
+
+.wi-cards {
+  margin-bottom: 4px;
+}
+
+.wi-card.svc-card {
+  padding: 20px 18px 18px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wi-card .wi-card__icon.svc-icon-circle {
+  margin-bottom: 12px;
+  width: 44px;
+  height: 44px;
+}
+
+.wi-svg-graphic {
+  width: 26px;
+  height: auto;
+  display: block;
+}
+
+.wi-card__title {
+  margin: 0 0 8px;
+  font-family: var(--svc-font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--svc-blue);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.wi-card__divider {
+  width: 36px;
+  height: 2px;
+  margin: 0 auto 12px;
+  background: linear-gradient(90deg, transparent, rgba(60, 135, 192, 0.45), transparent);
+  border-radius: 2px;
+  opacity: 0.85;
+}
+
+.wi-card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  flex: 1;
+}
+
+.wi-card__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-family: var(--svc-font-sans);
+  font-size: 12.75px;
+  line-height: 1.45;
+  color: #4b5563;
+}
+
+.wi-card__list li:last-child {
+  margin-bottom: 0;
+}
+
+.wi-check {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--svc-blue);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  line-height: 1;
+}
+
+.wi-cta.svc-cta {
+  margin-top: var(--svc-cta-mt);
+  padding-top: 0;
+}
+
+@media only screen and (max-width: 899px) {
+  .wi-card.svc-card {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

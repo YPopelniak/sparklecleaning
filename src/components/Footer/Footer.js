@@ -5,7 +5,6 @@ import InputSubscription from "../UI/InputSubscription/InputSubscription";
 import logo from '../imgs/logo2.png'
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
- import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 // import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 // import TwitterIcon from '@mui/icons-material/Twitter';
 // import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -52,7 +51,6 @@ function Footer(props) {
                             <a href={'tel:+15855598021'}><LocalPhoneOutlinedIcon/>&nbsp;+1 (585) 559-8021</a>
                             <a href={'mailto:chsparklee@gmail.com'}><EmailOutlinedIcon/>&nbsp;chsparklee@gmail.com</a>
                             <a href={'https://www.instagram.com/sparkle_elite.cleaning/'} target={"_blank"} rel={'noreferrer'}><InstagramIcon/>&nbsp;sparkle_elite_cleaning</a>
-                            <a href={'https://www.google.com/maps/contrib/101126728402981810923?g_ep=CAISDDYuOTEuMS4yMjk5MBgAIIG9BCoJLDQ3MDcxNzA0QgJVUw%3D%3D&g_st=it'} target={"_blank"} rel={'noreferrer'} style={{width:"auto"}}><FmdGoodOutlinedIcon/>&nbsp;5024 N Delphia Ave,<br/>&nbsp;Chicago, IL 60656</a>
                         </Grid>
                     </Grid>
 

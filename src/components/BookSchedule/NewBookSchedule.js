@@ -3,21 +3,21 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from "@mui/material/InputLabel";
-import {Button, FormControl} from "@mui/material";
+import { Button, FormControl } from "@mui/material";
 import './BookSchedule.css'
-import {useEffect, useState} from "react";
-import {sendMessage} from "../../api/bookSchedule.ts";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {DemoContainer, DemoItem} from "@mui/x-date-pickers/internals/demo";
-import {DatePicker} from "@mui/x-date-pickers/DatePicker";
-import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
+import { useEffect, useState } from "react";
+import { sendMessage } from "../../api/bookSchedule.ts";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import dayjs from 'dayjs';
-import {renderTimeViewClock, TimePicker} from "@mui/x-date-pickers";
+import { renderTimeViewClock, TimePicker } from "@mui/x-date-pickers";
 import * as PropTypes from "prop-types";
-import {MuiTelInput} from 'mui-tel-input'
-import { enqueueSnackbar} from 'notistack';
+import { MuiTelInput } from 'mui-tel-input'
+import { enqueueSnackbar } from 'notistack';
 
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
@@ -27,10 +27,10 @@ import Modal from "@mui/material/Modal";
 const today = dayjs();
 
 const Price_list = {
-    'Regular Cleaning' :40,
-    'After Repair': 43,
-    'Move-in/ Move-out': 45,
-    'Deep Cleaning':43
+    'Regular Cleaning': 45,
+    'After Repair': 50,
+    'Move-in/ Move-out': 50,
+    'Deep Cleaning': 50
 }
 
 
@@ -151,6 +151,14 @@ const bathrooms_list = [
     },
     {
         value: 7,
+        label: '7 Bathrooms'
+    },
+    {
+        value: 8,
+        label: '8 Bathrooms'
+    },
+    {
+        value: 9,
         label: '0 Bathrooms'
     },
 ];
@@ -180,6 +188,7 @@ export default function BookSchedule() {
     const [bedrooms, setBedrooms] = useState('1 Bedrooms')
     const [bathrooms, setBathrooms] = useState('')
     const [price, setPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
     const [date, setDate] = useState('')
     const [time, setTime] = useState('')
     const [address, setAddress] = useState('')
@@ -208,7 +217,7 @@ export default function BookSchedule() {
             case 'name':
                 setNameDirty(true)
                 break
-            case 'phone' :
+            case 'phone':
                 setPhoneDirty(true)
                 break
             default:
@@ -257,7 +266,30 @@ export default function BookSchedule() {
     }
 
     useEffect(() => {
-        setPrice(Number(Price_list[service]) + Number((bedrooms.split(' ')[0] * 10)) + Number((bathrooms.split(' ')[0] * 25)))
+        const bedroomsCount = Number(bedrooms.split(' ')[0]) || 0;
+        const bathroomsCount = Number(bathrooms.split(' ')[0]) || 0;
+        const premiumService = ['After Repair', 'Move-in/ Move-out', 'Deep Cleaning'].includes(service);
+
+        if (premiumService) {
+            // Target calibration:
+            // 2 bed + 2 bath => 240-300
+            // 2 bed + 3 bath => 280-360
+            const minPrice = 80 + (bedroomsCount * 40) + (bathroomsCount * 40);
+            const rangeMaxPrice = 60 + (bedroomsCount * 60) + (bathroomsCount * 60);
+            setPrice(minPrice);
+            setMaxPrice(rangeMaxPrice);
+            return;
+        }
+
+        // Regular Cleaning is now hour-based at $90/hour.
+        // Calibration targets:
+        // 1 bed + 1 bath => $120-$150
+        // 3 bed + 2 bath => roughly 3.0-3.5 hours
+        const hourlyRate = 90;
+        const minHours = 1.3333 + Math.max(0, bedroomsCount - 1) * 0.75 + Math.max(0, bathroomsCount - 1) * 0.1667;
+        const maxHours = 1.6667 + Math.max(0, bedroomsCount - 1) * 0.8333 + Math.max(0, bathroomsCount - 1) * 0.1667;
+        setPrice(Math.round(minHours * hourlyRate));
+        setMaxPrice(Math.round(maxHours * hourlyRate));
     }, [service, bedrooms, bathrooms])
 
 
@@ -274,7 +306,7 @@ export default function BookSchedule() {
         const message =
             `New order!!!${'%0A'}Name: ${name}${'%0A'}Phone: ${phone}${'%0A'}Date: ${date}${'%0A'}Time : ${time}${'%0A'}Address: ${address}${'%0A'}Type of Service: ${service} ${'%0A'}Total Square Footage: ${squareFootage}${'%0A'}Bedrooms: ${bedrooms}${'%0A'}Bathrooms: ${bathrooms}${'%0A'}`
         await sendMessage(message)
-        enqueueSnackbar('The message was successfully sent!!', {variant: 'success'});
+        enqueueSnackbar('The message was successfully sent!!', { variant: 'success' });
         setName('');
         setPhone('');
         setFormValid(false);
@@ -300,12 +332,12 @@ export default function BookSchedule() {
                 sx={{
                     margin: '0 auto 50px',
                     textAlign: 'center',
-                    '& .MuiTextField-root': {m: 1, margin: '0', textAlign: 'left', width: '100%'},
-                    '& .MuiFormControl-root': {padding: '10px 8px 8px',},
+                    '& .MuiTextField-root': { m: 1, margin: '0', textAlign: 'left', width: '100%' },
+                    '& .MuiFormControl-root': { padding: '10px 8px 8px', },
                     '& .MuiInputLabel-root': {
                         marginBottom: '10px'
                     },
-                    '& .MuiStack-root': {padding: '0', width: '100%'}
+                    '& .MuiStack-root': { padding: '0', width: '100%' }
                 }}
                 noValidate
                 autoComplete="off"
@@ -321,7 +353,7 @@ export default function BookSchedule() {
                 <div>
                     <FormControl
                         sx={{
-                            width: {lg: '35ch', md: '70ch', sm:'70ch', xs:'35ch'},
+                            width: { lg: '35ch', md: '70ch', sm: '70ch', xs: '35ch' },
                         }}
                     >
                         <InputLabel shrink htmlFor="bootstrap-input" size='medium'>
@@ -342,7 +374,7 @@ export default function BookSchedule() {
                                 <em>Type of Service</em>
                             </MenuItem>
                             {service_list.map((option) => (
-                                <MenuItem key={option.value} value={option.label }>
+                                <MenuItem key={option.value} value={option.label}>
                                     {option.label}
                                 </MenuItem>
                             ))}
@@ -352,7 +384,7 @@ export default function BookSchedule() {
                         sx={{
                             padding: '0 !important',
                         }}>
-                        <div style={{display: 'flex'}}>
+                        <div style={{ display: 'flex' }}>
                             <FormControl
                                 className={'width30ch'}
                             >
@@ -403,9 +435,9 @@ export default function BookSchedule() {
                     </FormControl>
                     <FormControl
                         sx={{
-                            width: {lg: '35ch', md: '70ch', sm:'70ch', xs:'38ch'},
-                            m: '20px 0 0', boxSizing:'border-box',
-                            p:'0 16px !important'
+                            width: { lg: '35ch', md: '70ch', sm: '70ch', xs: '38ch' },
+                            m: '20px 0 0', boxSizing: 'border-box',
+                            p: '0 16px !important'
                         }}
                     >
                         <Button
@@ -414,7 +446,7 @@ export default function BookSchedule() {
                             color={'primary'}
                             onClick={handleOpen}
                         >
-                            Booking From {(price) ? `$${price} to  $${Math.ceil(price * 1.35)}` : ''}</Button>
+                            Booking From {(price) ? `$${price} to  $${maxPrice}` : ''}</Button>
                     </FormControl>
                     <Modal
                         aria-labelledby="transition-modal-title"
@@ -422,7 +454,7 @@ export default function BookSchedule() {
                         open={open}
                         onClose={handleClose}
                         closeAfterTransition
-                        slots={{backdrop: Backdrop}}
+                        slots={{ backdrop: Backdrop }}
                         slotProps={{
                             backdrop: {
                                 timeout: 500,
@@ -431,16 +463,16 @@ export default function BookSchedule() {
                     >
                         <Fade in={open}>
                             <Box className={'Modal'}
-                                 sx={{
-                                     margin: '0 auto 50px',
-                                     textAlign: 'center',
-                                     '& .MuiTextField-root': {m: 1, margin: '0', textAlign: 'left', width: '100%'},
-                                     '& .MuiFormControl-root': {padding: '10px 8px 8px',},
-                                     '& .MuiInputLabel-root': {
-                                         marginBottom: '10px'
-                                     },
-                                     '& .MuiStack-root': {padding: '0', width: '100%'}
-                                 }}
+                                sx={{
+                                    margin: '0 auto 50px',
+                                    textAlign: 'center',
+                                    '& .MuiTextField-root': { m: 1, margin: '0', textAlign: 'left', width: '100%' },
+                                    '& .MuiFormControl-root': { padding: '10px 8px 8px', },
+                                    '& .MuiInputLabel-root': {
+                                        marginBottom: '10px'
+                                    },
+                                    '& .MuiStack-root': { padding: '0', width: '100%' }
+                                }}
 
                             >
                                 <div>
@@ -577,18 +609,18 @@ export default function BookSchedule() {
 
                         */}
                                         <MuiTelInput name={'phone'}
-                                                     defaultCountry="US" onChange={e => phoneHandler(e)}
-                                                     onBlur={e => blurHandler(e)} value={phone}
-                                                     inputProps={{maxLength: 20}}
+                                            defaultCountry="US" onChange={e => phoneHandler(e)}
+                                            onBlur={e => blurHandler(e)} value={phone}
+                                            inputProps={{ maxLength: 20 }}
                                         />
 
 
                                     </FormControl>
                                 </div>
                                 <div>
-                                    <Button className={'button'} variant="contained" sx={{p: 2, width: '300px', margin: '0 auto'}}
-                                            onClick={handleSubmit}
-                                            disabled={!formValid}>
+                                    <Button className={'button'} variant="contained" sx={{ p: 2, width: '300px', margin: '0 auto' }}
+                                        onClick={handleSubmit}
+                                        disabled={!formValid}>
                                         Confirm
 
                                     </Button>
@@ -744,7 +776,7 @@ export default function BookSchedule() {
                         <Button className={'button'} variant="contained" sx={{p: 2, width: '300px', margin: '0 auto'}}
                                 onClick={handleSubmit}
                                 disabled={!formValid}>
-                            Booking From {(price) ? `$${price} to  $${Math.ceil(price * 1.35)}` : ''}
+                            Booking From {(price) ? `$${price} to  $${maxPrice}` : ''}
 
                         </Button>
                     </div>*/}

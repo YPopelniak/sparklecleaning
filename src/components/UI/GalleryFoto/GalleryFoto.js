@@ -1,6 +1,6 @@
-import React, {} from 'react';
+import React, { } from 'react';
 // Import Swiper React components
-import {Swiper, SwiperSlide} from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 import './GalleryFoto.css';
 
 // import required modules
-import {Autoplay, Pagination} from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 import Foto_one from '../../imgs/one.webp'
 import Foto_two from '../../imgs/two.webp'
@@ -41,25 +41,23 @@ export default function GalleryFoto() {
                 modules={[Autoplay, Pagination]}
                 className="GalleryFoto"
             >
-                <SwiperSlide><img src={Kitchen} alt={'Kitchen'}/></SwiperSlide>
-                <SwiperSlide><img src={Foto_one} alt={'Foto_one'}/></SwiperSlide>
-                <SwiperSlide><img src={Foto_two} alt={'Foto_two'}/></SwiperSlide>
-                <SwiperSlide><img src={Foto_thee} alt={'Foto_thee'}/></SwiperSlide>
+                <SwiperSlide><img src={Kitchen} alt={'Kitchen'} /></SwiperSlide>
+                <SwiperSlide><img src={Foto_one} alt={'Foto_one'} /></SwiperSlide>
+                <SwiperSlide><img src={Foto_two} alt={'Foto_two'} /></SwiperSlide>
+                <SwiperSlide><img src={Foto_thee} alt={'Foto_thee'} /></SwiperSlide>
 
-                <SwiperSlide><img src={Foto_four} alt={'Foto_four'}/></SwiperSlide>
-                <SwiperSlide><img src={Foto_five} alt={'Foto_five'}/></SwiperSlide>
-                <SwiperSlide><img src={Foto_six} alt={'Foto_two'}/></SwiperSlide>
-                <SwiperSlide><img src={Foto_seven} alt={'Foto_thee'}/></SwiperSlide>
+                <SwiperSlide><img src={Foto_four} alt={'Foto_four'} /></SwiperSlide>
+                <SwiperSlide><img src={Foto_five} alt={'Foto_five'} /></SwiperSlide>
+                <SwiperSlide><img src={Foto_six} alt={'Foto_two'} /></SwiperSlide>
+                <SwiperSlide><img src={Foto_seven} alt={'Foto_thee'} /></SwiperSlide>
 
-                <SwiperSlide><img src={Foto_eight} alt={'Kitchen'}/></SwiperSlide>
-                <SwiperSlide><img src={Foto_ten} alt={'Foto_two'}/></SwiperSlide>
+                <SwiperSlide><img src={Foto_eight} alt={'Kitchen'} /></SwiperSlide>
+                <SwiperSlide><img src={Foto_ten} alt={'Foto_two'} /></SwiperSlide>
 
 
 
             </Swiper>
         </>
-    );{/*
-                <SwiperSlide><img src={Foto_nine} alt={'Foto_one'}/></SwiperSlide>
-*/}
+    );
 
 }

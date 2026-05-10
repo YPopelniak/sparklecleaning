@@ -21,19 +21,6 @@
   justify-content: center;
   max-width: 1440px;
 }
-.Customers .comments .steamy {
-  background: #B5D5ED !important;
-  color: #FFFFFF !important;
-}
-.Customers .comments .steamy h4 {
-  color: #FFFFFF !important;
-}
-.Customers .comments .steamy h5 {
-  color: #FFFFFF !important;
-}
-.Customers .comments .steamy p {
-  color: #FFFFFF !important;
-}
 .Customers .comments .comment {
   width: 90%;
   height: auto;
