@@ -48,7 +48,7 @@ function Footer(props) {
 {/*
                             <a href={'tel:+17082227245'}><LocalPhoneOutlinedIcon/>&nbsp;+1 (708) 222-7245</a>
 */}
-                            <a href={'tel:+15855598021'}><LocalPhoneOutlinedIcon/>&nbsp;+1 (585) 559-8021</a>
+                            <a href={'tel:+18723624820'}><LocalPhoneOutlinedIcon/>&nbsp;+1 (872) 362-4820</a>
                             <a href={'mailto:chsparklee@gmail.com'}><EmailOutlinedIcon/>&nbsp;chsparklee@gmail.com</a>
                             <a href={'https://www.instagram.com/sparkle_elite.cleaning/'} target={"_blank"} rel={'noreferrer'}><InstagramIcon/>&nbsp;sparkle_elite_cleaning</a>
                         </Grid>
